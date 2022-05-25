@@ -128,7 +128,7 @@ local function _19_()
   return awful.client.focus.byidx(-1)
 end
 local function _20_()
-  return mymainmenu:show()
+  return mylauncher:show()
 end
 local function _21_()
   return awful.client.swap.byidx(1)

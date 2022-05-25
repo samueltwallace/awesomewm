@@ -108,10 +108,10 @@
 			    3 s.mypromptbox }
 			2 s.mytasklist ;; middle widget
 			3 { :layout wibox.layout.fixed.horizontal ;; horizontal layout for right side
-			    1 (awful.widget.watch "bash -c 'curl -s https://wttr.in/chicago?format=3'"
-						  600
+			    1 (awful.widget.watch "bash -c 'curl -s https://wttr.in/chicago?format=3'" ;; take from wttr.in
+						  600 ;;refresh every 5 mins
 						  (fn [widget stdout]
-						      (tset widget :text stdout))
+						      (tset widget :text stdout)) ;; make it weather_box text
 						  weather_box)
 			    2 (wibox.widget.systray)
 			    3 (awful.widget.watch "bash -c 'acpi -b'" ;; watching battery updates
@@ -141,7 +141,7 @@
                    (awful.key [modkey] "Escape" awful.tag.history.restore)
                    (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
                    (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
-                   (awful.key [modkey] "x" (fn [] (mymainmenu:show)))
+                   (awful.key [modkey] "x" (fn [] (mylauncher:show)))
                    (awful.key [modkey "Control"] "r" awesome.restart)
                    (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
                    (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
