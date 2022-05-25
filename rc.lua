@@ -1,3 +1,11 @@
+local gears = require("gears")
+require("gears.surface")
+local awful = require("awful")
+require("awful.autofocus")
+local wibox = require("wibox")
+local beautiful = require("beautiful")
+local naughty = require("naughty")
+local menubar = require("menubar")
 local function dist_table_prefix(bigtbl, names)
   local tbl_15_auto = {}
   local i_16_auto = #tbl_15_auto
@@ -16,14 +24,6 @@ local function dist_table_prefix(bigtbl, names)
   end
   return tbl_15_auto
 end
-local gears = require("gears")
-require("gears.surface")
-local awful = require("awful")
-require("awful.autofocus")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
-local naughty = require("naughty")
-local menubar = require("menubar")
 if awesome.startup_errors then
   naughty.notify({preset = naughty.config.presets.critical, title = "Oops, there were errors during startup!", text = awesome.startup_errors})
 else
@@ -61,15 +61,11 @@ local function _9_()
   return awful.spawn("discord")
 end
 menu = {{"quit", awesome.quit}, {"restart", awesome.restart}, {"edit config", (editor_cmd .. " " .. fnlconf)}, {"Emacs", _6_}, {"Firefox", _7_}, {"Zathura", _8_}, {"Discord", _9_}}
-local myawesomemenu = table.insert(menu, {"restart", awesome.restart})
-local mymainmenu = awful.menu({items = menu})
-local mylauncher = awful.widget.launcher({image = beautiful.awesome_icon, menu = mymainmenu})
-menubar.utils.terminal = terminal
+local my_perm_tags = {"E", "F", "Z", "D"}
 local function set_wallpaper(s)
   return os.execute("/home/samueltwallace/.local/bin/fehbg")
 end
-local my_tags = {"E", "F", "Z", "D"}
-screen.connect_signal("property::geometry", set_wallpaper)
+local mylauncher = awful.widget.launcher({image = beautiful.awesome_icon, menu = awful.menu({items = menu})})
 local batt_bar = wibox.widget({widget = wibox.widget.progressbar, forced_width = 200, shape = gears.shape.rounded_bar, bar_shape = gears.shape.rounded_bar, background_color = "yellow"})
 local batt_hover
 local function _10_()
@@ -87,9 +83,10 @@ end
 taglist_buttons = gears.table.join(awful.button({}, 1, _11_), awful.button({}, 3, awful.tag.viewtoggle))
 local batt_low = false
 local batt_thresh = 0.25
+local weather_box = wibox.widget({widget = wibox.widget.textbox, text = "No weather right now"})
 local function _12_(s)
   set_wallpaper(s)
-  awful.tag(my_tags, s, awful.layout.layouts[1])
+  awful.tag(my_perm_tags, s, awful.layout.layouts[1])
   do end (s)["mypromptbox"] = awful.widget.prompt()
   do end (s)["mylayoutbox"] = awful.widget.layoutbox(s)
   local function _13_()
@@ -100,6 +97,10 @@ local function _12_(s)
   do end (s)["mytasklist"] = awful.widget.tasklist({screen = s, filter = awful.widget.tasklist.filter.currenttags})
   do end (s)["mywibox"] = awful.wibar({position = "top", screen = s})
   local function _14_(widget, stdout)
+    widget["text"] = stdout
+    return nil
+  end
+  local function _15_(widget, stdout)
     local batt_percent = (tonumber(string.match(stdout, "(%d+)%%")) / 100)
     widget:set_value(batt_percent)
     if ((batt_percent < batt_thresh) and not batt_low) then
@@ -116,43 +117,43 @@ local function _12_(s)
       return nil
     end
   end
-  return (s.mywibox):setup({layout = wibox.layout.align.horizontal, {layout = wibox.layout.fixed.horizontal, mylauncher, s.mytaglist, s.mypromptbox}, s.mytasklist, {layout = wibox.layout.fixed.horizontal, wibox.widget.systray(), awful.widget.watch("bash -c 'acpi -b'", 30, _14_, batt_bar), mytextclock, s.mylayoutbox}})
+  return (s.mywibox):setup({layout = wibox.layout.align.horizontal, {layout = wibox.layout.fixed.horizontal, mylauncher, s.mytaglist, s.mypromptbox}, s.mytasklist, {layout = wibox.layout.fixed.horizontal, awful.widget.watch("bash -c 'curl -s https://wttr.in/chicago?format=3'", 600, _14_, weather_box), wibox.widget.systray(), awful.widget.watch("bash -c 'acpi -b'", 30, _15_, batt_bar), mytextclock, s.mylayoutbox}})
 end
 awful.screen.connect_for_each_screen(_12_)
 local globalkeys
-local function _17_()
+local function _18_()
   return awful.client.focus.byidx(1)
 end
-local function _18_()
+local function _19_()
   return awful.client.focus.byidx(-1)
 end
-local function _19_()
+local function _20_()
   return mymainmenu:show()
 end
-local function _20_()
+local function _21_()
   return awful.client.swap.byidx(1)
 end
-local function _21_()
+local function _22_()
   return awful.client.swap.byidx(-1)
 end
-local function _22_()
+local function _23_()
   return awful.screen.focus_relative(1)
 end
-local function _23_()
+local function _24_()
   return awful.spawn("i3lock -c 000000")
 end
-local function _24_()
+local function _25_()
   return menubar.show()
 end
-globalkeys = gears.table.join(awful.key({modkey}, "Left", awful.tag.viewprev), awful.key({modkey}, "Right", awful.tag.viewnext), awful.key({modkey}, "Escape", awful.tag.history.restore), awful.key({modkey}, "j", _17_), awful.key({modkey}, "k", _18_), awful.key({modkey}, "x", _19_), awful.key({modkey, "Control"}, "r", awesome.restart), awful.key({modkey, "Shift"}, "j", _20_), awful.key({modkey, "Shift"}, "k", _21_), awful.key({modkey}, "Tab", _22_), awful.key({modkey}, "u", awful.client.urgent.jumpto), awful.key({modkey}, "g", _23_), awful.key({modkey}, "space", _24_))
+globalkeys = gears.table.join(awful.key({modkey}, "Left", awful.tag.viewprev), awful.key({modkey}, "Right", awful.tag.viewnext), awful.key({modkey}, "Escape", awful.tag.history.restore), awful.key({modkey}, "j", _18_), awful.key({modkey}, "k", _19_), awful.key({modkey}, "x", _20_), awful.key({modkey, "Control"}, "r", awesome.restart), awful.key({modkey, "Shift"}, "j", _21_), awful.key({modkey, "Shift"}, "k", _22_), awful.key({modkey}, "Tab", _23_), awful.key({modkey}, "u", awful.client.urgent.jumpto), awful.key({modkey}, "g", _24_), awful.key({modkey}, "space", _25_))
 local clientkeys
-local function _25_(c)
+local function _26_(c)
   c["fullscreen"] = not c.fullscreen
   return c:raise()
 end
-clientkeys = gears.table.join(awful.key({modkey}, "f", _25_))
-for idx, tag_name in pairs(my_tags) do
-  local function _26_()
+clientkeys = gears.table.join(awful.key({modkey}, "f", _26_))
+for idx, tag_name in pairs(my_perm_tags) do
+  local function _27_()
     local screen = awful.screen.focused()
     local tag = screen.tags[idx]
     if tag then
@@ -161,7 +162,7 @@ for idx, tag_name in pairs(my_tags) do
       return nil
     end
   end
-  local function _28_()
+  local function _29_()
     local screen = awful.screen.focused()
     local tag = screen.tags[idx]
     if tag then
@@ -170,7 +171,7 @@ for idx, tag_name in pairs(my_tags) do
       return nil
     end
   end
-  local function _30_()
+  local function _31_()
     if client.focus then
       local tag = client.focus.screen.tags[i]
       if tag then
@@ -182,11 +183,11 @@ for idx, tag_name in pairs(my_tags) do
       return nil
     end
   end
-  globalkeys = gears.table.join(globalkeys, awful.key({modkey}, ("#" .. (idx + 9)), _26_), awful.key({modkey, "Control"}, ("#" .. (idx + 9)), _28_), awful.key({modkey, "Shift"}, ("#" .. (idx + 9)), _30_))
+  globalkeys = gears.table.join(globalkeys, awful.key({modkey}, ("#" .. (idx + 9)), _27_), awful.key({modkey, "Control"}, ("#" .. (idx + 9)), _29_), awful.key({modkey, "Shift"}, ("#" .. (idx + 9)), _31_))
 end
 root.keys(globalkeys)
 do end (awful.rules)["rules"] = {{rule = {}, properties = {border_width = beautiful.border_width, border_color = beautiful.border_normal, focus = awful.client.focus.filter, raise = true, keys = clientkeys, screen = awful.screen.preferred, placement = (awful.placement.no_overlap + awful.placement.no_offscreen)}}, {rule = {class = "Emacs"}, properties = {screen = screen.count(), tag = "E"}}, {rule = {class = "firefox"}, properties = {tag = "F"}}, {rule = {class = "Zathura"}, properties = {tag = "Z"}}, {rule = {class = "discord"}, properties = {tag = "D"}}}
-local function _33_(c)
+local function _34_(c)
   if (awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position) then
     awful.placement.no_offscreen(c)
   else
@@ -198,11 +199,11 @@ local function _33_(c)
     return nil
   end
 end
-client.connect_signal("manage", _33_)
+client.connect_signal("manage", _34_)
 local function is_tag_by_name(tag, name)
   return (tag == awful.tag.find_by_name(awful.screen.focused(), name))
 end
-local function _36_(c)
+local function _37_(c)
   for _, tag in ipairs(c.screen.tags) do
     if not (tag:clients()[1] or is_tag_by_name(tag, "E") or is_tag_by_name(tag, "F") or is_tag_by_name(tag, "Z") or is_tag_by_name(tag, "D")) then
       tag:delete()
@@ -212,10 +213,10 @@ local function _36_(c)
   end
   return nil
 end
-client.connect_signal("unmanage", _36_)
-local function _38_(c)
+client.connect_signal("unmanage", _37_)
+local function _39_(c)
   c:emit_signal("request::activate", "mouse_enter", {raise = false})
   return nil
 end
-client.connect_signal("mouse::enter", _38_)
+client.connect_signal("mouse::enter", _39_)
 return awful.spawn("pgrep emacs || emacs")

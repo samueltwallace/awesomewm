@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-05-23 Mon 11:26 -->
+<!-- 2022-05-25 Wed 09:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Awesomewm Fennel Config</title>
@@ -201,35 +201,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2e5c1a8">Intro</a>
+<li><a href="#org2568ec6">Intro</a>
 <ul>
-<li><a href="#org1cb9637">Requirement</a></li>
+<li><a href="#orgab7bc5b">Requirements</a></li>
 </ul>
 </li>
-<li><a href="#org29f1a67">Startup and Helpful functions</a></li>
-<li><a href="#org489f347">Theming and Locals</a></li>
-<li><a href="#org4b2a8f3">Menu, Widgets, and Tags</a></li>
-<li><a href="#orgff2b7b6">Screen Connect</a></li>
-<li><a href="#orgfa0eb1b">Keybindings</a></li>
-<li><a href="#org7664cce">Rules</a></li>
-<li><a href="#org84db91d">Signals and Workspace Assignment</a></li>
-<li><a href="#org154f1d9">Startup Programs</a></li>
-<li><a href="#orgfccb481">Final Notes</a></li>
+<li><a href="#orgef8f12f">Startup and Helpful functions</a></li>
+<li><a href="#org567771c">Theming and Locals</a></li>
+<li><a href="#orga44baac">Menu, Widgets, and Tags</a></li>
+<li><a href="#org053014f">Screen Connect</a></li>
+<li><a href="#org9c883bf">Keybindings</a></li>
+<li><a href="#orgf1ac456">Rules</a></li>
+<li><a href="#org2f19a01">Signals and Workspace Assignment</a></li>
+<li><a href="#org871091c">Startup Programs</a></li>
+<li><a href="#org1a156bf">Final Notes</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2e5c1a8" class="outline-2">
-<h2 id="org2e5c1a8">Intro</h2>
-<div class="outline-text-2" id="text-org2e5c1a8">
+<div id="outline-container-org2568ec6" class="outline-2">
+<h2 id="org2568ec6">Intro</h2>
+<div class="outline-text-2" id="text-org2568ec6">
 <p>
 This is my <a href="https://awesomewm.org/">Awesomewm</a> configuration file, written in <a href="https://fennel-lang.org/">the Fennel Language</a>. Awesome is configured by writing code in Lua, and Fennel is a lisp-like language that compiles to Lua. Let's get into the code!
 </p>
 </div>
 
-<div id="outline-container-org1cb9637" class="outline-3">
-<h3 id="org1cb9637">Requirement</h3>
-<div class="outline-text-3" id="text-org1cb9637">
+<div id="outline-container-orgab7bc5b" class="outline-3">
+<h3 id="orgab7bc5b">Requirements</h3>
+<div class="outline-text-3" id="text-orgab7bc5b">
 <ul class="org-ul">
 <li>Awesome window manager</li>
 <li>Fennel binary</li>
@@ -240,23 +240,23 @@ This is my <a href="https://awesomewm.org/">Awesomewm</a> configuration file, wr
 </div>
 </div>
 
-<div id="outline-container-org29f1a67" class="outline-2">
-<h2 id="org29f1a67">Startup and Helpful functions</h2>
-<div class="outline-text-2" id="text-org29f1a67">
+<div id="outline-container-orgef8f12f" class="outline-2">
+<h2 id="orgef8f12f">Startup and Helpful functions</h2>
+<div class="outline-text-2" id="text-orgef8f12f">
 <p>
 Let's start off by loading the awesome libraries:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">gears</span> (<span style="color: #c251df;">require</span> <span style="color: #c251df;">:gears</span>))
-(<span style="color: #c251df;">require</span> <span style="color: #ae2823;">"gears.surface"</span>)
-(<span style="color: #58b1f3; font-weight: bold;">local</span>  <span style="color: #e9e953;">awful</span> (<span style="color: #c251df;">require</span> <span style="color: #c251df;">:awful</span>))
-(<span style="color: #c251df;">require</span> <span style="color: #ae2823;">"awful.autofocus"</span>)
-(<span style="color: #58b1f3; font-weight: bold;">local</span>  <span style="color: #e9e953;">wibox</span> (<span style="color: #c251df;">require</span> <span style="color: #c251df;">:wibox</span>))
-(<span style="color: #58b1f3; font-weight: bold;">local</span>  <span style="color: #e9e953;">beautiful</span> (<span style="color: #c251df;">require</span> <span style="color: #c251df;">:beautiful</span>))
-(<span style="color: #58b1f3; font-weight: bold;">local</span>  <span style="color: #e9e953;">naughty</span> (<span style="color: #c251df;">require</span> <span style="color: #c251df;">:naughty</span>))
-(<span style="color: #58b1f3; font-weight: bold;">local</span>  <span style="color: #e9e953;">menubar</span> (<span style="color: #c251df;">require</span> <span style="color: #c251df;">:menubar</span>))  
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">gears</span> (<span style="color: #e81eda;">require</span> <span style="color: #e81eda;">:gears</span>))
+(<span style="color: #e81eda;">require</span> <span style="color: #c83029;">"gears.surface"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span>  <span style="color: #f8ffa0;">awful</span> (<span style="color: #e81eda;">require</span> <span style="color: #e81eda;">:awful</span>))
+(<span style="color: #e81eda;">require</span> <span style="color: #c83029;">"awful.autofocus"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span>  <span style="color: #f8ffa0;">wibox</span> (<span style="color: #e81eda;">require</span> <span style="color: #e81eda;">:wibox</span>))
+(<span style="color: #94bff3; font-weight: bold;">local</span>  <span style="color: #f8ffa0;">beautiful</span> (<span style="color: #e81eda;">require</span> <span style="color: #e81eda;">:beautiful</span>))
+(<span style="color: #94bff3; font-weight: bold;">local</span>  <span style="color: #f8ffa0;">naughty</span> (<span style="color: #e81eda;">require</span> <span style="color: #e81eda;">:naughty</span>))
+(<span style="color: #94bff3; font-weight: bold;">local</span>  <span style="color: #f8ffa0;">menubar</span> (<span style="color: #e81eda;">require</span> <span style="color: #e81eda;">:menubar</span>))  
 </pre>
 </div>
 
@@ -266,11 +266,11 @@ Then we'll define a function for distributing table access over keys:
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #58b1f3; font-weight: bold;">fn</span> <span style="color: #1e7bda;">dist-table-prefix</span> [bigtbl names]
-  (<span style="color: #58b1f3; font-weight: bold;">icollect</span> [_ name (<span style="color: #c251df;">ipairs</span> names)]
-    (<span style="color: #58b1f3; font-weight: bold;">if</span> (<span style="color: #58b1f3; font-weight: bold;">=</span> (<span style="color: #c251df;">type</span> name) <span style="color: #ae2823;">"table"</span>)
-        (<span style="color: #58b1f3; font-weight: bold;">.</span> bigtbl (<span style="color: #e353b9;">table.unpack</span> name))
-        (<span style="color: #58b1f3; font-weight: bold;">.</span> bigtbl name))))
+<pre class="src src-fennel">(<span style="color: #94bff3; font-weight: bold;">fn</span> <span style="color: #30a5f5;">dist-table-prefix</span> [bigtbl names]
+  (<span style="color: #94bff3; font-weight: bold;">icollect</span> [_ name (<span style="color: #e81eda;">ipairs</span> names)]
+    (<span style="color: #94bff3; font-weight: bold;">if</span> (<span style="color: #94bff3; font-weight: bold;">=</span> (<span style="color: #e81eda;">type</span> name) <span style="color: #c83029;">"table"</span>)
+        (<span style="color: #94bff3; font-weight: bold;">.</span> bigtbl (<span style="color: #dc8cc3;">table.unpack</span> name))
+        (<span style="color: #94bff3; font-weight: bold;">.</span> bigtbl name))))
 </pre>
 </div>
 
@@ -281,21 +281,21 @@ Now we can get into startup error checking:
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">if</span> <span style="color: #e353b9;">awesome.startup_errors</span>
-    (<span style="color: #e353b9;">naughty.notify</span> { <span style="color: #c251df;">:preset</span> <span style="color: #e353b9;">naughty.config.presets.critical</span>
-                      <span style="color: #c251df;">:title</span> <span style="color: #ae2823;">"Oops, there were errors during startup!"</span>
-                      <span style="color: #c251df;">:text</span> <span style="color: #e353b9;">awesome.startup_errors</span> }))
+(<span style="color: #94bff3; font-weight: bold;">if</span> <span style="color: #dc8cc3;">awesome.startup_errors</span>
+    (<span style="color: #dc8cc3;">naughty.notify</span> { <span style="color: #e81eda;">:preset</span> <span style="color: #dc8cc3;">naughty.config.presets.critical</span>
+                      <span style="color: #e81eda;">:title</span> <span style="color: #c83029;">"Oops, there were errors during startup!"</span>
+                      <span style="color: #e81eda;">:text</span> <span style="color: #dc8cc3;">awesome.startup_errors</span> }))
 
-(<span style="color: #58b1f3; font-weight: bold;">let</span> [in-error false]
-  (<span style="color: #e353b9;">awesome.connect_signal</span>
-   <span style="color: #ae2823;">"debug::error"</span>
-   (<span style="color: #58b1f3; font-weight: bold;">fn</span> [err]
-     (<span style="color: #58b1f3; font-weight: bold;">if</span> in-error
+(<span style="color: #94bff3; font-weight: bold;">let</span> [in-error false]
+  (<span style="color: #dc8cc3;">awesome.connect_signal</span>
+   <span style="color: #c83029;">"debug::error"</span>
+   (<span style="color: #94bff3; font-weight: bold;">fn</span> [err]
+     (<span style="color: #94bff3; font-weight: bold;">if</span> in-error
          nil
-         (<span style="color: #58b1f3; font-weight: bold;">let</span> [in-error true]
-           (<span style="color: #e353b9;">naughty.notify</span> { <span style="color: #c251df;">:preset</span> <span style="color: #e353b9;">naughty.config.presets.critical</span>
-                             <span style="color: #c251df;">:title</span> <span style="color: #ae2823;">"Oops, an error happened!"</span>
-                             <span style="color: #c251df;">:text</span> (<span style="color: #c251df;">tostring</span> err) }))))))
+         (<span style="color: #94bff3; font-weight: bold;">let</span> [in-error true]
+           (<span style="color: #dc8cc3;">naughty.notify</span> { <span style="color: #e81eda;">:preset</span> <span style="color: #dc8cc3;">naughty.config.presets.critical</span>
+                             <span style="color: #e81eda;">:title</span> <span style="color: #c83029;">"Oops, an error happened!"</span>
+                             <span style="color: #e81eda;">:text</span> (<span style="color: #e81eda;">tostring</span> err) }))))))
 </pre>
 </div>
 
@@ -306,16 +306,16 @@ This is almost identical to the default startup error catching code.
 </div>
 
 
-<div id="outline-container-org489f347" class="outline-2">
-<h2 id="org489f347">Theming and Locals</h2>
-<div class="outline-text-2" id="text-org489f347">
+<div id="outline-container-org567771c" class="outline-2">
+<h2 id="org567771c">Theming and Locals</h2>
+<div class="outline-text-2" id="text-org567771c">
 <p>
 Use the Zenburn theme:
 </p>
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #e353b9;">beautiful.init</span> (<span style="color: #58b1f3; font-weight: bold;">..</span> (<span style="color: #e353b9;">gears.filesystem.get_themes_dir</span>) <span style="color: #ae2823;">"zenburn/theme.lua"</span>))
+<pre class="src src-fennel">(<span style="color: #dc8cc3;">beautiful.init</span> (<span style="color: #94bff3; font-weight: bold;">..</span> (<span style="color: #dc8cc3;">gears.filesystem.get_themes_dir</span>) <span style="color: #c83029;">"zenburn/theme.lua"</span>))
 </pre>
 </div>
 
@@ -326,27 +326,27 @@ And we set up some local variables for program preferences, layouts, etc&#x2026;
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">terminal</span> <span style="color: #ae2823;">"emacsclient -e '(shell)'"</span>)
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">editor</span> <span style="color: #ae2823;">"emacsclient"</span>)
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">editor-cmd</span> <span style="color: #ae2823;">"emacsclient"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">terminal</span> <span style="color: #c83029;">"emacsclient -e '(shell)'"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">editor</span> <span style="color: #c83029;">"emacsclient"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">editor-cmd</span> <span style="color: #c83029;">"emacsclient"</span>)
 
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">modkey</span> <span style="color: #ae2823;">"Mod4"</span>)
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">fnlconf</span> <span style="color: #ae2823;">"~/.config/awesome/rc.fnl"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">modkey</span> <span style="color: #c83029;">"Mod4"</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">fnlconf</span> <span style="color: #c83029;">"~/.config/awesome/rc.fnl"</span>)
 
-(<span style="color: #58b1f3; font-weight: bold;">set</span> <span style="color: #e353b9;">awful.layout.layouts</span> (dist-table-prefix
-                           <span style="color: #e353b9;">awful.layout.suit</span>
-                           [ [<span style="color: #ae2823;">"tile"</span> <span style="color: #ae2823;">"right"</span>] <span style="color: #ae2823;">"max"</span> <span style="color: #ae2823;">"floating"</span>]))
+(<span style="color: #94bff3; font-weight: bold;">set</span> <span style="color: #dc8cc3;">awful.layout.layouts</span> (dist-table-prefix
+                           <span style="color: #dc8cc3;">awful.layout.suit</span>
+                           [ [<span style="color: #c83029;">"tile"</span> <span style="color: #c83029;">"right"</span>] <span style="color: #c83029;">"max"</span> <span style="color: #c83029;">"floating"</span>]))
 
 
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">menu</span> [[<span style="color: #ae2823;">"quit"</span> <span style="color: #e353b9;">awesome.quit</span>]
-             [<span style="color: #ae2823;">"restart"</span> <span style="color: #e353b9;">awesome.restart</span>]
-             [<span style="color: #ae2823;">"edit config"</span> (<span style="color: #58b1f3; font-weight: bold;">..</span> editor-cmd <span style="color: #ae2823;">" "</span> fnlconf)]
-             [<span style="color: #ae2823;">"Emacs"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.spawn</span> <span style="color: #ae2823;">"emacs"</span>))]
-             [<span style="color: #ae2823;">"Firefox"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.spawn</span> <span style="color: #ae2823;">"firefox"</span>))]
-             [<span style="color: #ae2823;">"Zathura"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.spawn</span> <span style="color: #ae2823;">"zathura"</span>))]
-             [<span style="color: #ae2823;">"Discord"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.spawn</span> <span style="color: #ae2823;">"discord"</span>))]])
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">menu</span> [[<span style="color: #c83029;">"quit"</span> <span style="color: #dc8cc3;">awesome.quit</span>]
+             [<span style="color: #c83029;">"restart"</span> <span style="color: #dc8cc3;">awesome.restart</span>]
+             [<span style="color: #c83029;">"edit config"</span> (<span style="color: #94bff3; font-weight: bold;">..</span> editor-cmd <span style="color: #c83029;">" "</span> fnlconf)]
+             [<span style="color: #c83029;">"Emacs"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.spawn</span> <span style="color: #c83029;">"emacs"</span>))]
+             [<span style="color: #c83029;">"Firefox"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.spawn</span> <span style="color: #c83029;">"firefox"</span>))]
+             [<span style="color: #c83029;">"Zathura"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.spawn</span> <span style="color: #c83029;">"zathura"</span>))]
+             [<span style="color: #c83029;">"Discord"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.spawn</span> <span style="color: #c83029;">"discord"</span>))]])
 
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">my-perm-tags</span> [<span style="color: #ae2823;">"E"</span> <span style="color: #ae2823;">"F"</span> <span style="color: #ae2823;">"Z"</span> <span style="color: #ae2823;">"D"</span>])
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">my-perm-tags</span> [<span style="color: #c83029;">"E"</span> <span style="color: #c83029;">"F"</span> <span style="color: #c83029;">"Z"</span> <span style="color: #c83029;">"D"</span>])
 </pre>
 </div>
 
@@ -361,7 +361,7 @@ The menu item will become the launcher menu. I don't use the awesome default wal
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">fn</span> <span style="color: #1e7bda;">set-wallpaper</span> [s] (<span style="color: #e353b9;">os.execute</span> <span style="color: #ae2823;">"/home/samueltwallace/.local/bin/fehbg"</span>))
+(<span style="color: #94bff3; font-weight: bold;">fn</span> <span style="color: #30a5f5;">set-wallpaper</span> [s] (<span style="color: #dc8cc3;">os.execute</span> <span style="color: #c83029;">"/home/samueltwallace/.local/bin/fehbg"</span>))
 
 </pre>
 </div>
@@ -372,17 +372,17 @@ And the script there sets a random backgrouns through <code>feh --bg-fill --rand
 </div>
 </div>
 
-<div id="outline-container-org4b2a8f3" class="outline-2">
-<h2 id="org4b2a8f3">Menu, Widgets, and Tags</h2>
-<div class="outline-text-2" id="text-org4b2a8f3">
+<div id="outline-container-orga44baac" class="outline-2">
+<h2 id="orga44baac">Menu, Widgets, and Tags</h2>
+<div class="outline-text-2" id="text-orga44baac">
 <p>
 We make a menu with the awesome icon with the following:
 </p>
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">mylauncher</span> (<span style="color: #e353b9;">awful.widget.launcher</span> {<span style="color: #c251df;">:image</span> <span style="color: #e353b9;">beautiful.awesome_icon</span>
-                                          <span style="color: #c251df;">:menu</span> (<span style="color: #e353b9;">awful.menu</span> { <span style="color: #c251df;">:items</span> menu })}))
+<pre class="src src-fennel">(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">mylauncher</span> (<span style="color: #dc8cc3;">awful.widget.launcher</span> {<span style="color: #e81eda;">:image</span> <span style="color: #dc8cc3;">beautiful.awesome_icon</span>
+                                          <span style="color: #e81eda;">:menu</span> (<span style="color: #dc8cc3;">awful.menu</span> { <span style="color: #e81eda;">:items</span> menu })}))
 </pre>
 </div>
 
@@ -393,29 +393,29 @@ Now we can make some widgets:
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">batt_bar</span> (<span style="color: #e353b9;">wibox.widget</span> { <span style="color: #c251df;">:widget</span> <span style="color: #e353b9;">wibox.widget.progressbar</span>
-                                <span style="color: #c251df;">:forced_width</span> 200
-                                <span style="color: #c251df;">:shape</span> <span style="color: #e353b9;">gears.shape.rounded_bar</span>
-                                <span style="color: #c251df;">:bar_shape</span> <span style="color: #e353b9;">gears.shape.rounded_bar</span>
-                                <span style="color: #c251df;">:background_color</span> <span style="color: #ae2823;">"yellow"</span>}))
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">batt_bar</span> (<span style="color: #dc8cc3;">wibox.widget</span> { <span style="color: #e81eda;">:widget</span> <span style="color: #dc8cc3;">wibox.widget.progressbar</span>
+                                <span style="color: #e81eda;">:forced_width</span> 200
+                                <span style="color: #e81eda;">:shape</span> <span style="color: #dc8cc3;">gears.shape.rounded_bar</span>
+                                <span style="color: #e81eda;">:bar_shape</span> <span style="color: #dc8cc3;">gears.shape.rounded_bar</span>
+                                <span style="color: #e81eda;">:background_color</span> <span style="color: #c83029;">"yellow"</span>}))
 
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">batt_hover</span> (<span style="color: #e353b9;">awful.tooltip</span> {
-                                  <span style="color: #c251df;">:objects</span> [batt_bar]
-                                  <span style="color: #c251df;">:timer_function</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> []
-                                                    (<span style="color: #58b1f3; font-weight: bold;">let</span> [batt_proc (<span style="color: #e353b9;">io.popen</span> <span style="color: #ae2823;">"bash -c 'acpi -b'"</span>)
-                                                          batt_str (batt_proc<span style="color: #c251df;">:read</span> <span style="color: #ae2823;">"*a"</span>)]
-                                                      (<span style="color: #58b1f3; font-weight: bold;">do</span>
-                                                        (batt_proc<span style="color: #c251df;">:close</span>)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">batt_hover</span> (<span style="color: #dc8cc3;">awful.tooltip</span> {
+                                  <span style="color: #e81eda;">:objects</span> [batt_bar]
+                                  <span style="color: #e81eda;">:timer_function</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> []
+                                                    (<span style="color: #94bff3; font-weight: bold;">let</span> [batt_proc (<span style="color: #dc8cc3;">io.popen</span> <span style="color: #c83029;">"bash -c 'acpi -b'"</span>)
+                                                          batt_str (batt_proc<span style="color: #e81eda;">:read</span> <span style="color: #c83029;">"*a"</span>)]
+                                                      (<span style="color: #94bff3; font-weight: bold;">do</span>
+                                                        (batt_proc<span style="color: #e81eda;">:close</span>)
                                                         batt_str)))}))
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">mytextclock</span> (<span style="color: #e353b9;">wibox.widget.textclock</span>))
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">mytextclock</span> (<span style="color: #dc8cc3;">wibox.widget.textclock</span>))
 
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">taglist_buttons</span> (<span style="color: #e353b9;">gears.table.join</span>
-                        (<span style="color: #e353b9;">awful.button</span> {} 1 (<span style="color: #58b1f3; font-weight: bold;">fn</span> [t] (t<span style="color: #c251df;">:view_only</span>)))
-                        (<span style="color: #e353b9;">awful.button</span> {} 3 <span style="color: #e353b9;">awful.tag.viewtoggle</span>)))
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">taglist_buttons</span> (<span style="color: #dc8cc3;">gears.table.join</span>
+                        (<span style="color: #dc8cc3;">awful.button</span> {} 1 (<span style="color: #94bff3; font-weight: bold;">fn</span> [t] (t<span style="color: #e81eda;">:view_only</span>)))
+                        (<span style="color: #dc8cc3;">awful.button</span> {} 3 <span style="color: #dc8cc3;">awful.tag.viewtoggle</span>)))
 
-(<span style="color: #58b1f3; font-weight: bold;">var</span> <span style="color: #e9e953;">batt_low</span> false)
+(<span style="color: #94bff3; font-weight: bold;">var</span> <span style="color: #f8ffa0;">batt_low</span> false)
 
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">batt_thresh</span> 0.25)
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">batt_thresh</span> 0.25)
 </pre>
 </div>
 
@@ -438,13 +438,22 @@ The <code>batt_hover</code> widget gives the <code>batt_bar</code> a hover popup
 <p>
 <code>mytextclock</code> makes a widget for showing the current time in text.
 </p>
+
+<p>
+<code>weather_box</code> will show the weather in a textbox, <code>curl</code>'ed from <a href="https://wttr.in">https://wttr.in</a>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-fennel">(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">weather_box</span> (<span style="color: #dc8cc3;">wibox.widget</span> {<span style="color: #e81eda;">:widget</span> <span style="color: #dc8cc3;">wibox.widget.textbox</span>
+                                  <span style="color: #e81eda;">:text</span> <span style="color: #c83029;">"No weather right now"</span>}))
+</pre>
+</div>
 </div>
 </div>
 
-
-<div id="outline-container-orgff2b7b6" class="outline-2">
-<h2 id="orgff2b7b6">Screen Connect</h2>
-<div class="outline-text-2" id="text-orgff2b7b6">
+<div id="outline-container-org053014f" class="outline-2">
+<h2 id="org053014f">Screen Connect</h2>
+<div class="outline-text-2" id="text-org053014f">
 <p>
 Now we'll start to put some of these variables into action! We will call <code>connect_for_each_screen</code> to set up behavior for each screen.
 </p>
@@ -455,58 +464,63 @@ I'll comment through the large code block below rather than separately annotatin
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #e353b9;">awful.screen.connect_for_each_screen</span>
- (<span style="color: #58b1f3; font-weight: bold;">fn</span> [s]
-   (<span style="color: #58b1f3; font-weight: bold;">do</span>
-     (set-wallpaper s) <span style="color: #29b029;">;; </span><span style="color: #29b029;">set wallpaper on each screen</span>
-     (<span style="color: #e353b9;">awful.tag</span> my-perm-tags s (<span style="color: #58b1f3; font-weight: bold;">.</span> <span style="color: #e353b9;">awful.layout.layouts</span> 1)) <span style="color: #29b029;">;; </span><span style="color: #29b029;">use first layout in the list by default</span>
-     (<span style="color: #58b1f3; font-weight: bold;">tset</span> s <span style="color: #c251df;">:mypromptbox</span> (<span style="color: #e353b9;">awful.widget.prompt</span>)) <span style="color: #29b029;">;;</span><span style="color: #29b029;">have a prompt box</span>
-     (<span style="color: #58b1f3; font-weight: bold;">tset</span> s <span style="color: #c251df;">:mylayoutbox</span> (<span style="color: #e353b9;">awful.widget.layoutbox</span> s)) <span style="color: #29b029;">;; </span><span style="color: #29b029;">have a box showing current layout</span>
-     (s.mylayoutbox<span style="color: #c251df;">:buttons</span> (<span style="color: #e353b9;">awful.button</span> {} 1 (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.layout.inc</span> 1)))) <span style="color: #29b029;">;;</span><span style="color: #29b029;">clicking on layoutbox advances the layouts through the list</span>
-     (<span style="color: #58b1f3; font-weight: bold;">tset</span> s <span style="color: #c251df;">:mytaglist</span> (<span style="color: #e353b9;">awful.widget.taglist</span> {
-                                             <span style="color: #c251df;">:screen</span> s
-                                             <span style="color: #c251df;">:filter</span> <span style="color: #e353b9;">awful.widget.taglist.filter.noempty</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">only show tags which are not empty</span>
-                                             <span style="color: #c251df;">:buttons</span> taglist_buttons})) <span style="color: #29b029;">;; </span><span style="color: #29b029;">click the taglist by the predefined buttons</span>
-     (<span style="color: #58b1f3; font-weight: bold;">tset</span> s <span style="color: #c251df;">:mytasklist</span> (<span style="color: #e353b9;">awful.widget.tasklist</span> { <span style="color: #c251df;">:screen</span> s
-                                                <span style="color: #c251df;">:filter</span> <span style="color: #e353b9;">awful.widget.tasklist.filter.currenttags</span>})) <span style="color: #29b029;">;; </span><span style="color: #29b029;">show the icons and names of windows in the current tag(s)</span>
-     (<span style="color: #58b1f3; font-weight: bold;">tset</span> s <span style="color: #c251df;">:mywibox</span> (<span style="color: #e353b9;">awful.wibar</span> { <span style="color: #c251df;">:position</span> <span style="color: #ae2823;">"top"</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">show bar across top of screen</span>
-                                     <span style="color: #c251df;">:screen</span> s }))
-     (s.mywibox<span style="color: #c251df;">:setup</span> { <span style="color: #c251df;">:layout</span> <span style="color: #e353b9;">wibox.layout.align.horizontal</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">horizontal layout for the whole bar</span>
-                        1 { <span style="color: #c251df;">:layout</span> <span style="color: #e353b9;">wibox.layout.fixed.horizontal</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">horizontal layout for the left side</span>
+<pre class="src src-fennel">(<span style="color: #dc8cc3;">awful.screen.connect_for_each_screen</span>
+ (<span style="color: #94bff3; font-weight: bold;">fn</span> [s]
+   (<span style="color: #94bff3; font-weight: bold;">do</span>
+     (set-wallpaper s) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">set wallpaper on each screen</span>
+     (<span style="color: #dc8cc3;">awful.tag</span> my-perm-tags s (<span style="color: #94bff3; font-weight: bold;">.</span> <span style="color: #dc8cc3;">awful.layout.layouts</span> 1)) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">use first layout in the list by default</span>
+     (<span style="color: #94bff3; font-weight: bold;">tset</span> s <span style="color: #e81eda;">:mypromptbox</span> (<span style="color: #dc8cc3;">awful.widget.prompt</span>)) <span style="color: #32cd32;">;;</span><span style="color: #32cd32;">have a prompt box</span>
+     (<span style="color: #94bff3; font-weight: bold;">tset</span> s <span style="color: #e81eda;">:mylayoutbox</span> (<span style="color: #dc8cc3;">awful.widget.layoutbox</span> s)) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">have a box showing current layout</span>
+     (s.mylayoutbox<span style="color: #e81eda;">:buttons</span> (<span style="color: #dc8cc3;">awful.button</span> {} 1 (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.layout.inc</span> 1)))) <span style="color: #32cd32;">;;</span><span style="color: #32cd32;">clicking on layoutbox advances the layouts through the list</span>
+     (<span style="color: #94bff3; font-weight: bold;">tset</span> s <span style="color: #e81eda;">:mytaglist</span> (<span style="color: #dc8cc3;">awful.widget.taglist</span> {
+                                             <span style="color: #e81eda;">:screen</span> s
+                                             <span style="color: #e81eda;">:filter</span> <span style="color: #dc8cc3;">awful.widget.taglist.filter.noempty</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">only show tags which are not empty</span>
+                                             <span style="color: #e81eda;">:buttons</span> taglist_buttons})) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">click the taglist by the predefined buttons</span>
+     (<span style="color: #94bff3; font-weight: bold;">tset</span> s <span style="color: #e81eda;">:mytasklist</span> (<span style="color: #dc8cc3;">awful.widget.tasklist</span> { <span style="color: #e81eda;">:screen</span> s
+                                                <span style="color: #e81eda;">:filter</span> <span style="color: #dc8cc3;">awful.widget.tasklist.filter.currenttags</span>})) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">show the icons and names of windows in the current tag(s)</span>
+     (<span style="color: #94bff3; font-weight: bold;">tset</span> s <span style="color: #e81eda;">:mywibox</span> (<span style="color: #dc8cc3;">awful.wibar</span> { <span style="color: #e81eda;">:position</span> <span style="color: #c83029;">"top"</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">show bar across top of screen</span>
+                                     <span style="color: #e81eda;">:screen</span> s }))
+     (s.mywibox<span style="color: #e81eda;">:setup</span> { <span style="color: #e81eda;">:layout</span> <span style="color: #dc8cc3;">wibox.layout.align.horizontal</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">horizontal layout for the whole bar</span>
+                        1 { <span style="color: #e81eda;">:layout</span> <span style="color: #dc8cc3;">wibox.layout.fixed.horizontal</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">horizontal layout for the left side</span>
                             1 mylauncher
-                            2 <span style="color: #e353b9;">s.mytaglist</span>
-                            3 <span style="color: #e353b9;">s.mypromptbox</span> }
-                        2 <span style="color: #e353b9;">s.mytasklist</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">middle widget</span>
-                        3 { <span style="color: #c251df;">:layout</span> <span style="color: #e353b9;">wibox.layout.fixed.horizontal</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">horizontal layout for right side</span>
-                            1 (<span style="color: #e353b9;">wibox.widget.systray</span>)
-                            2 (<span style="color: #e353b9;">awful.widget.watch</span> <span style="color: #ae2823;">"bash -c 'acpi -b'"</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">watching battery updates</span>
-                                                  30 <span style="color: #29b029;">;; </span><span style="color: #29b029;">recall every 30 secs</span>
-                                                  (<span style="color: #58b1f3; font-weight: bold;">fn</span> [widget stdout] <span style="color: #29b029;">;; </span><span style="color: #29b029;">here is fn to be called after calling acpi</span>
-                                                    (<span style="color: #58b1f3; font-weight: bold;">let</span> [batt_percent (<span style="color: #58b1f3; font-weight: bold;">/</span> (<span style="color: #c251df;">tonumber</span> (<span style="color: #e353b9;">string.match</span> stdout <span style="color: #ae2823;">"(%d+)%%"</span>)) 100)] <span style="color: #29b029;">;; </span><span style="color: #29b029;">get battery percentage as decimal</span>
-                                                      (<span style="color: #58b1f3; font-weight: bold;">do</span>
-                                                        (widget<span style="color: #c251df;">:set_value</span> batt_percent) <span style="color: #29b029;">;; </span><span style="color: #29b029;">set progressbar to show batt_percent full</span>
-                                                        (<span style="color: #58b1f3; font-weight: bold;">if</span> (<span style="color: #58b1f3; font-weight: bold;">and</span> (<span style="color: #58b1f3; font-weight: bold;">&lt;</span> batt_percent batt_thresh) <span style="color: #29b029;">;; </span><span style="color: #29b029;">if we are hitting batt_thresh for first time, then</span>
-                                                                 (<span style="color: #58b1f3; font-weight: bold;">not</span> batt_low))
-                                                            (<span style="color: #58b1f3; font-weight: bold;">do</span>
-                                                              (<span style="color: #e353b9;">naughty.notify</span> {<span style="color: #c251df;">:title</span> <span style="color: #ae2823;">"Battery Low!"</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">notify about low battery</span>
-                                                                               <span style="color: #c251df;">:preset</span> <span style="color: #e353b9;">naughty.config.presets.critical</span>})
-                                                              (<span style="color: #58b1f3; font-weight: bold;">set</span> batt_low true)))
-                                                        (<span style="color: #58b1f3; font-weight: bold;">if</span> (<span style="color: #58b1f3; font-weight: bold;">&lt;</span> batt_percent batt_thresh) <span style="color: #29b029;">;; </span><span style="color: #29b029;">if low battery</span>
-                                                            (<span style="color: #58b1f3; font-weight: bold;">tset</span> widget <span style="color: #c251df;">:color</span> <span style="color: #ae2823;">"red"</span>) <span style="color: #29b029;">;;</span><span style="color: #29b029;">set bar color red</span>
-                                                            (<span style="color: #58b1f3; font-weight: bold;">do</span> <span style="color: #29b029;">;; </span><span style="color: #29b029;">otherwise set green and mark no low battery</span>
-                                                              (<span style="color: #58b1f3; font-weight: bold;">tset</span> widget <span style="color: #c251df;">:color</span> <span style="color: #ae2823;">"green"</span>)
-                                                              (<span style="color: #58b1f3; font-weight: bold;">set</span> batt_low false))))))
+                            2 <span style="color: #dc8cc3;">s.mytaglist</span>
+                            3 <span style="color: #dc8cc3;">s.mypromptbox</span> }
+                        2 <span style="color: #dc8cc3;">s.mytasklist</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">middle widget</span>
+                        3 { <span style="color: #e81eda;">:layout</span> <span style="color: #dc8cc3;">wibox.layout.fixed.horizontal</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">horizontal layout for right side</span>
+                            1 (<span style="color: #dc8cc3;">awful.widget.watch</span> <span style="color: #c83029;">"bash -c 'curl -s https://wttr.in/chicago?format=3'"</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">take from wttr.in</span>
+                                                  600 <span style="color: #32cd32;">;;</span><span style="color: #32cd32;">refresh every 5 mins</span>
+                                                  (<span style="color: #94bff3; font-weight: bold;">fn</span> [widget stdout]
+                                                      (<span style="color: #94bff3; font-weight: bold;">tset</span> widget <span style="color: #e81eda;">:text</span> stdout)) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">make it weather_box text</span>
+                                                  weather_box)
+                            2 (<span style="color: #dc8cc3;">wibox.widget.systray</span>)
+                            3 (<span style="color: #dc8cc3;">awful.widget.watch</span> <span style="color: #c83029;">"bash -c 'acpi -b'"</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">watching battery updates</span>
+                                                  30 <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">recall every 30 secs</span>
+                                                  (<span style="color: #94bff3; font-weight: bold;">fn</span> [widget stdout] <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">here is fn to be called after calling acpi</span>
+                                                    (<span style="color: #94bff3; font-weight: bold;">let</span> [batt_percent (<span style="color: #94bff3; font-weight: bold;">/</span> (<span style="color: #e81eda;">tonumber</span> (<span style="color: #dc8cc3;">string.match</span> stdout <span style="color: #c83029;">"(%d+)%%"</span>)) 100)] <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">get battery percentage as decimal</span>
+                                                      (<span style="color: #94bff3; font-weight: bold;">do</span>
+                                                        (widget<span style="color: #e81eda;">:set_value</span> batt_percent) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">set progressbar to show batt_percent full</span>
+                                                        (<span style="color: #94bff3; font-weight: bold;">if</span> (<span style="color: #94bff3; font-weight: bold;">and</span> (<span style="color: #94bff3; font-weight: bold;">&lt;</span> batt_percent batt_thresh) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">if we are hitting batt_thresh for first time, then</span>
+                                                                 (<span style="color: #94bff3; font-weight: bold;">not</span> batt_low))
+                                                            (<span style="color: #94bff3; font-weight: bold;">do</span>
+                                                              (<span style="color: #dc8cc3;">naughty.notify</span> {<span style="color: #e81eda;">:title</span> <span style="color: #c83029;">"Battery Low!"</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">notify about low battery</span>
+                                                                               <span style="color: #e81eda;">:preset</span> <span style="color: #dc8cc3;">naughty.config.presets.critical</span>})
+                                                              (<span style="color: #94bff3; font-weight: bold;">set</span> batt_low true)))
+                                                        (<span style="color: #94bff3; font-weight: bold;">if</span> (<span style="color: #94bff3; font-weight: bold;">&lt;</span> batt_percent batt_thresh) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">if low battery</span>
+                                                            (<span style="color: #94bff3; font-weight: bold;">tset</span> widget <span style="color: #e81eda;">:color</span> <span style="color: #c83029;">"red"</span>) <span style="color: #32cd32;">;;</span><span style="color: #32cd32;">set bar color red</span>
+                                                            (<span style="color: #94bff3; font-weight: bold;">do</span> <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">otherwise set green and mark no low battery</span>
+                                                              (<span style="color: #94bff3; font-weight: bold;">tset</span> widget <span style="color: #e81eda;">:color</span> <span style="color: #c83029;">"green"</span>)
+                                                              (<span style="color: #94bff3; font-weight: bold;">set</span> batt_low false))))))
                                                   batt_bar)
-                            3 mytextclock <span style="color: #29b029;">;; </span><span style="color: #29b029;">clock</span>
-                            4 <span style="color: #e353b9;">s.mylayoutbox</span>}})))) <span style="color: #29b029;">;; </span><span style="color: #29b029;">show layout</span>
+                            4 mytextclock <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">clock</span>
+                            5 <span style="color: #dc8cc3;">s.mylayoutbox</span>}})))) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">show layout</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgfa0eb1b" class="outline-2">
-<h2 id="orgfa0eb1b">Keybindings</h2>
-<div class="outline-text-2" id="text-orgfa0eb1b">
+<div id="outline-container-org9c883bf" class="outline-2">
+<h2 id="org9c883bf">Keybindings</h2>
+<div class="outline-text-2" id="text-org9c883bf">
 <p>
 We'll set up a variable for all the window management keybindings:
 </p>
@@ -514,20 +528,20 @@ We'll set up a variable for all the window management keybindings:
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">var</span> <span style="color: #e9e953;">globalkeys</span> (<span style="color: #e353b9;">gears.table.join</span>
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"Left"</span> <span style="color: #e353b9;">awful.tag.viewprev</span>)
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"Right"</span> <span style="color: #e353b9;">awful.tag.viewnext</span>)
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"Escape"</span> <span style="color: #e353b9;">awful.tag.history.restore</span>)
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"j"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.client.focus.byidx</span> 1)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"k"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.client.focus.byidx</span> -1)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"x"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (mymainmenu<span style="color: #c251df;">:show</span>)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey <span style="color: #ae2823;">"Control"</span>] <span style="color: #ae2823;">"r"</span> <span style="color: #e353b9;">awesome.restart</span>)
-                   (<span style="color: #e353b9;">awful.key</span> [modkey <span style="color: #ae2823;">"Shift"</span>] <span style="color: #ae2823;">"j"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.client.swap.byidx</span> 1)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey <span style="color: #ae2823;">"Shift"</span>] <span style="color: #ae2823;">"k"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.client.swap.byidx</span> -1)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"Tab"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.screen.focus_relative</span> 1)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"u"</span> <span style="color: #e353b9;">awful.client.urgent.jumpto</span>)
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"g"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">awful.spawn</span> <span style="color: #ae2823;">"i3lock -c 000000"</span>)))
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"space"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] (<span style="color: #e353b9;">menubar.show</span>)))))
+(<span style="color: #94bff3; font-weight: bold;">var</span> <span style="color: #f8ffa0;">globalkeys</span> (<span style="color: #dc8cc3;">gears.table.join</span>
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"Left"</span> <span style="color: #dc8cc3;">awful.tag.viewprev</span>)
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"Right"</span> <span style="color: #dc8cc3;">awful.tag.viewnext</span>)
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"Escape"</span> <span style="color: #dc8cc3;">awful.tag.history.restore</span>)
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"j"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.client.focus.byidx</span> 1)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"k"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.client.focus.byidx</span> -1)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"x"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (mymainmenu<span style="color: #e81eda;">:show</span>)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey <span style="color: #c83029;">"Control"</span>] <span style="color: #c83029;">"r"</span> <span style="color: #dc8cc3;">awesome.restart</span>)
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey <span style="color: #c83029;">"Shift"</span>] <span style="color: #c83029;">"j"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.client.swap.byidx</span> 1)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey <span style="color: #c83029;">"Shift"</span>] <span style="color: #c83029;">"k"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.client.swap.byidx</span> -1)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"Tab"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.screen.focus_relative</span> 1)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"u"</span> <span style="color: #dc8cc3;">awful.client.urgent.jumpto</span>)
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"g"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">awful.spawn</span> <span style="color: #c83029;">"i3lock -c 000000"</span>)))
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"space"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [] (<span style="color: #dc8cc3;">menubar.show</span>)))))
 </pre>
 </div>
 
@@ -538,10 +552,10 @@ Now we'll do the only client key I want to do: set to full screen.
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">local</span> <span style="color: #e9e953;">clientkeys</span> (<span style="color: #e353b9;">gears.table.join</span>
-                   (<span style="color: #e353b9;">awful.key</span> [modkey] <span style="color: #ae2823;">"f"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [c] (<span style="color: #58b1f3; font-weight: bold;">do</span>
-                                                     (<span style="color: #58b1f3; font-weight: bold;">tset</span> c <span style="color: #c251df;">:fullscreen</span> (<span style="color: #58b1f3; font-weight: bold;">not</span> <span style="color: #e353b9;">c.fullscreen</span>))
-                                                     (c<span style="color: #c251df;">:raise</span>))))))
+(<span style="color: #94bff3; font-weight: bold;">local</span> <span style="color: #f8ffa0;">clientkeys</span> (<span style="color: #dc8cc3;">gears.table.join</span>
+                   (<span style="color: #dc8cc3;">awful.key</span> [modkey] <span style="color: #c83029;">"f"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [c] (<span style="color: #94bff3; font-weight: bold;">do</span>
+                                                     (<span style="color: #94bff3; font-weight: bold;">tset</span> c <span style="color: #e81eda;">:fullscreen</span> (<span style="color: #94bff3; font-weight: bold;">not</span> <span style="color: #dc8cc3;">c.fullscreen</span>))
+                                                     (c<span style="color: #e81eda;">:raise</span>))))))
 </pre>
 </div>
 
@@ -552,24 +566,24 @@ Now we'll switch between workspaces with the <code>modkey</code> and a number, a
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">each</span> [idx tag-name (<span style="color: #c251df;">pairs</span> my-perm-tags)]
-  (<span style="color: #58b1f3; font-weight: bold;">set</span> globalkeys (<span style="color: #e353b9;">gears.table.join</span> globalkeys
-                                    (<span style="color: #e353b9;">awful.key</span> [modkey] (<span style="color: #58b1f3; font-weight: bold;">..</span> <span style="color: #ae2823;">"#"</span> (<span style="color: #58b1f3; font-weight: bold;">+</span> idx 9)) (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] <span style="color: #29b029;">;; </span><span style="color: #29b029;">on modkey + number keypress, </span>
-                                                                       (<span style="color: #58b1f3; font-weight: bold;">let</span> [screen (<span style="color: #e353b9;">awful.screen.focused</span>)
-                                                                             tag (<span style="color: #58b1f3; font-weight: bold;">.</span> <span style="color: #e353b9;">screen.tags</span> idx)]
-                                                                         (<span style="color: #58b1f3; font-weight: bold;">if</span> tag
-                                                                             (tag<span style="color: #c251df;">:view_only</span>)) <span style="color: #29b029;">;; </span><span style="color: #29b029;">view only the pressed tag.</span>
+(<span style="color: #94bff3; font-weight: bold;">each</span> [idx tag-name (<span style="color: #e81eda;">pairs</span> my-perm-tags)]
+  (<span style="color: #94bff3; font-weight: bold;">set</span> globalkeys (<span style="color: #dc8cc3;">gears.table.join</span> globalkeys
+                                    (<span style="color: #dc8cc3;">awful.key</span> [modkey] (<span style="color: #94bff3; font-weight: bold;">..</span> <span style="color: #c83029;">"#"</span> (<span style="color: #94bff3; font-weight: bold;">+</span> idx 9)) (<span style="color: #94bff3; font-weight: bold;">fn</span> [] <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on modkey + number keypress, </span>
+                                                                       (<span style="color: #94bff3; font-weight: bold;">let</span> [screen (<span style="color: #dc8cc3;">awful.screen.focused</span>)
+                                                                             tag (<span style="color: #94bff3; font-weight: bold;">.</span> <span style="color: #dc8cc3;">screen.tags</span> idx)]
+                                                                         (<span style="color: #94bff3; font-weight: bold;">if</span> tag
+                                                                             (tag<span style="color: #e81eda;">:view_only</span>)) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">view only the pressed tag.</span>
                                                                        )))
-                                    (<span style="color: #e353b9;">awful.key</span> [modkey <span style="color: #ae2823;">"Control"</span>] (<span style="color: #58b1f3; font-weight: bold;">..</span> <span style="color: #ae2823;">"#"</span> (<span style="color: #58b1f3; font-weight: bold;">+</span> idx 9)) (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] <span style="color: #29b029;">;; </span><span style="color: #29b029;">on modkey + control + number,</span>
-                                                                                 (<span style="color: #58b1f3; font-weight: bold;">let</span> [screen (<span style="color: #e353b9;">awful.screen.focused</span>)
-                                                                                       tag (<span style="color: #58b1f3; font-weight: bold;">.</span> <span style="color: #e353b9;">screen.tags</span> idx)]
-                                                                                   (<span style="color: #58b1f3; font-weight: bold;">if</span> tag
-                                                                                       (<span style="color: #e353b9;">awful.tag.viewtoggle</span> tag))))) <span style="color: #29b029;">;; </span><span style="color: #29b029;">view pressed tag as well.</span>
-                                    (<span style="color: #e353b9;">awful.key</span> [modkey <span style="color: #ae2823;">"Shift"</span>] (<span style="color: #58b1f3; font-weight: bold;">..</span> <span style="color: #ae2823;">"#"</span> (<span style="color: #58b1f3; font-weight: bold;">+</span> idx 9)) (<span style="color: #58b1f3; font-weight: bold;">fn</span> [] <span style="color: #29b029;">;; </span><span style="color: #29b029;">on modkey + shift + number,</span>
-                                                                               (<span style="color: #58b1f3; font-weight: bold;">if</span> <span style="color: #e353b9;">client.focus</span>
-                                                                                   (<span style="color: #58b1f3; font-weight: bold;">let</span> [tag (<span style="color: #58b1f3; font-weight: bold;">.</span> <span style="color: #e353b9;">client.focus.screen.tags</span> i)]
-                                                                                     (<span style="color: #58b1f3; font-weight: bold;">if</span> tag
-                                                                                         (client.focus<span style="color: #c251df;">:move_to_tag</span> tag))))))))) <span style="color: #29b029;">;; </span><span style="color: #29b029;">move client to pressed tag.</span>
+                                    (<span style="color: #dc8cc3;">awful.key</span> [modkey <span style="color: #c83029;">"Control"</span>] (<span style="color: #94bff3; font-weight: bold;">..</span> <span style="color: #c83029;">"#"</span> (<span style="color: #94bff3; font-weight: bold;">+</span> idx 9)) (<span style="color: #94bff3; font-weight: bold;">fn</span> [] <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on modkey + control + number,</span>
+                                                                                 (<span style="color: #94bff3; font-weight: bold;">let</span> [screen (<span style="color: #dc8cc3;">awful.screen.focused</span>)
+                                                                                       tag (<span style="color: #94bff3; font-weight: bold;">.</span> <span style="color: #dc8cc3;">screen.tags</span> idx)]
+                                                                                   (<span style="color: #94bff3; font-weight: bold;">if</span> tag
+                                                                                       (<span style="color: #dc8cc3;">awful.tag.viewtoggle</span> tag))))) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">view pressed tag as well.</span>
+                                    (<span style="color: #dc8cc3;">awful.key</span> [modkey <span style="color: #c83029;">"Shift"</span>] (<span style="color: #94bff3; font-weight: bold;">..</span> <span style="color: #c83029;">"#"</span> (<span style="color: #94bff3; font-weight: bold;">+</span> idx 9)) (<span style="color: #94bff3; font-weight: bold;">fn</span> [] <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on modkey + shift + number,</span>
+                                                                               (<span style="color: #94bff3; font-weight: bold;">if</span> <span style="color: #dc8cc3;">client.focus</span>
+                                                                                   (<span style="color: #94bff3; font-weight: bold;">let</span> [tag (<span style="color: #94bff3; font-weight: bold;">.</span> <span style="color: #dc8cc3;">client.focus.screen.tags</span> i)]
+                                                                                     (<span style="color: #94bff3; font-weight: bold;">if</span> tag
+                                                                                         (client.focus<span style="color: #e81eda;">:move_to_tag</span> tag))))))))) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">move client to pressed tag.</span>
 
 </pre>
 </div>
@@ -581,70 +595,70 @@ And let's set the keys:
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #e353b9;">root.keys</span> globalkeys)
+(<span style="color: #dc8cc3;">root.keys</span> globalkeys)
 
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7664cce" class="outline-2">
-<h2 id="org7664cce">Rules</h2>
-<div class="outline-text-2" id="text-org7664cce">
+<div id="outline-container-orgf1ac456" class="outline-2">
+<h2 id="orgf1ac456">Rules</h2>
+<div class="outline-text-2" id="text-orgf1ac456">
 <p>
 Most of this is fairly standard&#x2026; note the end though!
 </p>
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #58b1f3; font-weight: bold;">tset</span> <span style="color: #e353b9;">awful.rules</span> <span style="color: #c251df;">:rules</span> [
-                         { <span style="color: #c251df;">:rule</span> {} <span style="color: #29b029;">;; </span><span style="color: #29b029;">default for all windows</span>
-                           <span style="color: #c251df;">:properties</span> {
-                                        <span style="color: #c251df;">:border_width</span> <span style="color: #e353b9;">beautiful.border_width</span>
-                                        <span style="color: #c251df;">:border_color</span> <span style="color: #e353b9;">beautiful.border_normal</span>
-                                        <span style="color: #c251df;">:focus</span> <span style="color: #e353b9;">awful.client.focus.filter</span>
-                                        <span style="color: #c251df;">:raise</span> true
-                                        <span style="color: #c251df;">:keys</span> clientkeys
-                                        <span style="color: #c251df;">:screen</span> <span style="color: #e353b9;">awful.screen.preferred</span>
-                                        <span style="color: #c251df;">:placement</span> (<span style="color: #58b1f3; font-weight: bold;">+</span> <span style="color: #e353b9;">awful.placement.no_overlap</span> <span style="color: #e353b9;">awful.placement.no_offscreen</span>)}}
-                         { <span style="color: #c251df;">:rule</span> { <span style="color: #c251df;">:class</span> <span style="color: #ae2823;">"Emacs"</span> } <span style="color: #29b029;">;; </span><span style="color: #29b029;">emacs will end up</span>
-                           <span style="color: #c251df;">:properties</span> { <span style="color: #c251df;">:screen</span> (<span style="color: #e353b9;">screen.count</span>) <span style="color: #29b029;">;; </span><span style="color: #29b029;">on highest number screen</span>
-                                         <span style="color: #c251df;">:tag</span> <span style="color: #ae2823;">"E"</span> }} <span style="color: #29b029;">;; </span><span style="color: #29b029;">on tag "E"</span>
-                         {<span style="color: #c251df;">:rule</span> { <span style="color: #c251df;">:class</span> <span style="color: #ae2823;">"firefox"</span> } <span style="color: #29b029;">;; </span><span style="color: #29b029;">firefox will end up</span>
-                          <span style="color: #c251df;">:properties</span> { <span style="color: #c251df;">:tag</span> <span style="color: #ae2823;">"F"</span> }} <span style="color: #29b029;">;; </span><span style="color: #29b029;">on tag "F"</span>
-                         {<span style="color: #c251df;">:rule</span> { <span style="color: #c251df;">:class</span> <span style="color: #ae2823;">"Zathura"</span>} <span style="color: #29b029;">;; </span><span style="color: #29b029;">Zathura will end up</span>
-                          <span style="color: #c251df;">:properties</span> {<span style="color: #c251df;">:tag</span> <span style="color: #ae2823;">"Z"</span>}} <span style="color: #29b029;">;; </span><span style="color: #29b029;">on tag "Z"</span>
-                         {<span style="color: #c251df;">:rule</span> {<span style="color: #c251df;">:class</span> <span style="color: #ae2823;">"discord"</span> } <span style="color: #29b029;">;; </span><span style="color: #29b029;">and discord</span>
-                          <span style="color: #c251df;">:properties</span> {<span style="color: #c251df;">:tag</span> <span style="color: #ae2823;">"D"</span>}} ]) <span style="color: #29b029;">;; </span><span style="color: #29b029;">on tag "D"</span>
+<pre class="src src-fennel">(<span style="color: #94bff3; font-weight: bold;">tset</span> <span style="color: #dc8cc3;">awful.rules</span> <span style="color: #e81eda;">:rules</span> [
+                         { <span style="color: #e81eda;">:rule</span> {} <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">default for all windows</span>
+                           <span style="color: #e81eda;">:properties</span> {
+                                        <span style="color: #e81eda;">:border_width</span> <span style="color: #dc8cc3;">beautiful.border_width</span>
+                                        <span style="color: #e81eda;">:border_color</span> <span style="color: #dc8cc3;">beautiful.border_normal</span>
+                                        <span style="color: #e81eda;">:focus</span> <span style="color: #dc8cc3;">awful.client.focus.filter</span>
+                                        <span style="color: #e81eda;">:raise</span> true
+                                        <span style="color: #e81eda;">:keys</span> clientkeys
+                                        <span style="color: #e81eda;">:screen</span> <span style="color: #dc8cc3;">awful.screen.preferred</span>
+                                        <span style="color: #e81eda;">:placement</span> (<span style="color: #94bff3; font-weight: bold;">+</span> <span style="color: #dc8cc3;">awful.placement.no_overlap</span> <span style="color: #dc8cc3;">awful.placement.no_offscreen</span>)}}
+                         { <span style="color: #e81eda;">:rule</span> { <span style="color: #e81eda;">:class</span> <span style="color: #c83029;">"Emacs"</span> } <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">emacs will end up</span>
+                           <span style="color: #e81eda;">:properties</span> { <span style="color: #e81eda;">:screen</span> (<span style="color: #dc8cc3;">screen.count</span>) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on highest number screen</span>
+                                         <span style="color: #e81eda;">:tag</span> <span style="color: #c83029;">"E"</span> }} <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on tag "E"</span>
+                         {<span style="color: #e81eda;">:rule</span> { <span style="color: #e81eda;">:class</span> <span style="color: #c83029;">"firefox"</span> } <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">firefox will end up</span>
+                          <span style="color: #e81eda;">:properties</span> { <span style="color: #e81eda;">:tag</span> <span style="color: #c83029;">"F"</span> }} <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on tag "F"</span>
+                         {<span style="color: #e81eda;">:rule</span> { <span style="color: #e81eda;">:class</span> <span style="color: #c83029;">"Zathura"</span>} <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">Zathura will end up</span>
+                          <span style="color: #e81eda;">:properties</span> {<span style="color: #e81eda;">:tag</span> <span style="color: #c83029;">"Z"</span>}} <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on tag "Z"</span>
+                         {<span style="color: #e81eda;">:rule</span> {<span style="color: #e81eda;">:class</span> <span style="color: #c83029;">"discord"</span> } <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">and discord</span>
+                          <span style="color: #e81eda;">:properties</span> {<span style="color: #e81eda;">:tag</span> <span style="color: #c83029;">"D"</span>}} ]) <span style="color: #32cd32;">;; </span><span style="color: #32cd32;">on tag "D"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org84db91d" class="outline-2">
-<h2 id="org84db91d">Signals and Workspace Assignment</h2>
-<div class="outline-text-2" id="text-org84db91d">
+<div id="outline-container-org2f19a01" class="outline-2">
+<h2 id="org2f19a01">Signals and Workspace Assignment</h2>
+<div class="outline-text-2" id="text-org2f19a01">
 <p>
 Now we look at manage and unmanage signals. When we manage a new window, if it is not a commonly used program, put it on a new tag with name and icon matching program. Otherwise it goes to a perm-tag.
 </p>
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #e353b9;">client.connect_signal</span> <span style="color: #ae2823;">"manage"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [c]
-                                  (<span style="color: #58b1f3; font-weight: bold;">if</span> (<span style="color: #58b1f3; font-weight: bold;">and</span>
-                                       <span style="color: #e353b9;">awesome.startup</span>
-                                       (<span style="color: #58b1f3; font-weight: bold;">not</span> <span style="color: #e353b9;">c.size_hints.user_position</span>)
-                                       (<span style="color: #58b1f3; font-weight: bold;">not</span> <span style="color: #e353b9;">c.size_hints.program_position</span>))
-                                      (<span style="color: #e353b9;">awful.placement.no_offscreen</span> c))
-                                  (<span style="color: #58b1f3; font-weight: bold;">if</span> (<span style="color: #58b1f3; font-weight: bold;">not</span> (<span style="color: #58b1f3; font-weight: bold;">or</span>
-                                       (<span style="color: #58b1f3; font-weight: bold;">=</span> <span style="color: #e353b9;">c.class</span> <span style="color: #ae2823;">"Emacs"</span>)
-                                       (<span style="color: #58b1f3; font-weight: bold;">=</span> <span style="color: #e353b9;">c.class</span> <span style="color: #ae2823;">"Zathura"</span>)
-                                       (<span style="color: #58b1f3; font-weight: bold;">=</span> <span style="color: #e353b9;">c.class</span> <span style="color: #ae2823;">"firefox"</span>)
-                                       (<span style="color: #58b1f3; font-weight: bold;">=</span> <span style="color: #e353b9;">c.class</span> <span style="color: #ae2823;">"discord"</span>)))
-                                      (<span style="color: #58b1f3; font-weight: bold;">let</span> [t (<span style="color: #e353b9;">awful.tag.add</span> <span style="color: #e353b9;">c.class</span> {<span style="color: #c251df;">:screen</span> <span style="color: #e353b9;">c.screen</span>
-                                                                      <span style="color: #c251df;">:icon</span> (<span style="color: #e353b9;">gears.surface.duplicate_surface</span> <span style="color: #e353b9;">c.icon</span>)
-                                                                      <span style="color: #c251df;">:layout</span> (<span style="color: #58b1f3; font-weight: bold;">.</span> <span style="color: #e353b9;">awful.layout.layouts</span> 1)})]
-                                        (c<span style="color: #c251df;">:tags</span> [t])))))
+<pre class="src src-fennel">(<span style="color: #dc8cc3;">client.connect_signal</span> <span style="color: #c83029;">"manage"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [c]
+                                  (<span style="color: #94bff3; font-weight: bold;">if</span> (<span style="color: #94bff3; font-weight: bold;">and</span>
+                                       <span style="color: #dc8cc3;">awesome.startup</span>
+                                       (<span style="color: #94bff3; font-weight: bold;">not</span> <span style="color: #dc8cc3;">c.size_hints.user_position</span>)
+                                       (<span style="color: #94bff3; font-weight: bold;">not</span> <span style="color: #dc8cc3;">c.size_hints.program_position</span>))
+                                      (<span style="color: #dc8cc3;">awful.placement.no_offscreen</span> c))
+                                  (<span style="color: #94bff3; font-weight: bold;">if</span> (<span style="color: #94bff3; font-weight: bold;">not</span> (<span style="color: #94bff3; font-weight: bold;">or</span>
+                                       (<span style="color: #94bff3; font-weight: bold;">=</span> <span style="color: #dc8cc3;">c.class</span> <span style="color: #c83029;">"Emacs"</span>)
+                                       (<span style="color: #94bff3; font-weight: bold;">=</span> <span style="color: #dc8cc3;">c.class</span> <span style="color: #c83029;">"Zathura"</span>)
+                                       (<span style="color: #94bff3; font-weight: bold;">=</span> <span style="color: #dc8cc3;">c.class</span> <span style="color: #c83029;">"firefox"</span>)
+                                       (<span style="color: #94bff3; font-weight: bold;">=</span> <span style="color: #dc8cc3;">c.class</span> <span style="color: #c83029;">"discord"</span>)))
+                                      (<span style="color: #94bff3; font-weight: bold;">let</span> [t (<span style="color: #dc8cc3;">awful.tag.add</span> <span style="color: #dc8cc3;">c.class</span> {<span style="color: #e81eda;">:screen</span> <span style="color: #dc8cc3;">c.screen</span>
+                                                                      <span style="color: #e81eda;">:icon</span> (<span style="color: #dc8cc3;">gears.surface.duplicate_surface</span> <span style="color: #dc8cc3;">c.icon</span>)
+                                                                      <span style="color: #e81eda;">:layout</span> (<span style="color: #94bff3; font-weight: bold;">.</span> <span style="color: #dc8cc3;">awful.layout.layouts</span> 1)})]
+                                        (c<span style="color: #e81eda;">:tags</span> [t])))))
 
 </pre>
 </div>
@@ -656,21 +670,21 @@ For an unmanage signal, we delete the tag it's from if it's not on a perm-tag. W
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #58b1f3; font-weight: bold;">fn</span> <span style="color: #1e7bda;">is-tag-by-name</span> [tag name]
-  (<span style="color: #58b1f3; font-weight: bold;">=</span> tag (<span style="color: #e353b9;">awful.tag.find_by_name</span> (<span style="color: #e353b9;">awful.screen.focused</span>) name)))
+(<span style="color: #94bff3; font-weight: bold;">fn</span> <span style="color: #30a5f5;">is-tag-by-name</span> [tag name]
+  (<span style="color: #94bff3; font-weight: bold;">=</span> tag (<span style="color: #dc8cc3;">awful.tag.find_by_name</span> (<span style="color: #dc8cc3;">awful.screen.focused</span>) name)))
 
 
-(<span style="color: #e353b9;">client.connect_signal</span> <span style="color: #ae2823;">"unmanage"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [c]
-                                    (<span style="color: #58b1f3; font-weight: bold;">each</span> [_ tag (<span style="color: #c251df;">ipairs</span> <span style="color: #e353b9;">c.screen.tags</span>)]
-                                      (<span style="color: #58b1f3; font-weight: bold;">if</span> (<span style="color: #58b1f3; font-weight: bold;">not</span> (<span style="color: #58b1f3; font-weight: bold;">or</span>
-                                           (<span style="color: #58b1f3; font-weight: bold;">.</span> (tag<span style="color: #c251df;">:clients</span>) 1)
-                                           (is-tag-by-name tag <span style="color: #ae2823;">"E"</span>)
-                                           (is-tag-by-name tag <span style="color: #ae2823;">"F"</span>)
-                                           (is-tag-by-name tag <span style="color: #ae2823;">"Z"</span>)
-                                           (is-tag-by-name tag <span style="color: #ae2823;">"D"</span>)))
-                                          (<span style="color: #58b1f3; font-weight: bold;">do</span> (tag<span style="color: #c251df;">:delete</span>)
-                                              (<span style="color: #e353b9;">naughty.notify</span> {<span style="color: #c251df;">:text</span> (<span style="color: #58b1f3; font-weight: bold;">..</span> <span style="color: #ae2823;">"tag "</span> <span style="color: #e353b9;">tag.name</span> <span style="color: #ae2823;">" deleted!"</span>)
-                                                               <span style="color: #c251df;">:preset</span> <span style="color: #e353b9;">naughty.config.presets.critical</span>})))))) 
+(<span style="color: #dc8cc3;">client.connect_signal</span> <span style="color: #c83029;">"unmanage"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [c]
+                                    (<span style="color: #94bff3; font-weight: bold;">each</span> [_ tag (<span style="color: #e81eda;">ipairs</span> <span style="color: #dc8cc3;">c.screen.tags</span>)]
+                                      (<span style="color: #94bff3; font-weight: bold;">if</span> (<span style="color: #94bff3; font-weight: bold;">not</span> (<span style="color: #94bff3; font-weight: bold;">or</span>
+                                           (<span style="color: #94bff3; font-weight: bold;">.</span> (tag<span style="color: #e81eda;">:clients</span>) 1)
+                                           (is-tag-by-name tag <span style="color: #c83029;">"E"</span>)
+                                           (is-tag-by-name tag <span style="color: #c83029;">"F"</span>)
+                                           (is-tag-by-name tag <span style="color: #c83029;">"Z"</span>)
+                                           (is-tag-by-name tag <span style="color: #c83029;">"D"</span>)))
+                                          (<span style="color: #94bff3; font-weight: bold;">do</span> (tag<span style="color: #e81eda;">:delete</span>)
+                                              (<span style="color: #dc8cc3;">naughty.notify</span> {<span style="color: #e81eda;">:text</span> (<span style="color: #94bff3; font-weight: bold;">..</span> <span style="color: #c83029;">"tag "</span> <span style="color: #dc8cc3;">tag.name</span> <span style="color: #c83029;">" deleted!"</span>)
+                                                               <span style="color: #e81eda;">:preset</span> <span style="color: #dc8cc3;">naughty.config.presets.critical</span>})))))) 
 
 </pre>
 </div>
@@ -681,20 +695,20 @@ Now, we focus a window if mouse enters (sloppy focus)
 
 
 <div class="org-src-container">
-<pre class="src src-fennel">(<span style="color: #e353b9;">client.connect_signal</span> <span style="color: #ae2823;">"mouse::enter"</span> (<span style="color: #58b1f3; font-weight: bold;">fn</span> [c]
-                                        (c<span style="color: #c251df;">:emit_signal</span>
-                                         <span style="color: #ae2823;">"request::activate"</span>
-                                         <span style="color: #ae2823;">"mouse_enter"</span>
-                                         {<span style="color: #c251df;">:raise</span> false})
+<pre class="src src-fennel">(<span style="color: #dc8cc3;">client.connect_signal</span> <span style="color: #c83029;">"mouse::enter"</span> (<span style="color: #94bff3; font-weight: bold;">fn</span> [c]
+                                        (c<span style="color: #e81eda;">:emit_signal</span>
+                                         <span style="color: #c83029;">"request::activate"</span>
+                                         <span style="color: #c83029;">"mouse_enter"</span>
+                                         {<span style="color: #e81eda;">:raise</span> false})
 nil))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org154f1d9" class="outline-2">
-<h2 id="org154f1d9">Startup Programs</h2>
-<div class="outline-text-2" id="text-org154f1d9">
+<div id="outline-container-org871091c" class="outline-2">
+<h2 id="org871091c">Startup Programs</h2>
+<div class="outline-text-2" id="text-org871091c">
 <p>
 Start Emacs if not running:
 </p>
@@ -702,16 +716,16 @@ Start Emacs if not running:
 
 <div class="org-src-container">
 <pre class="src src-fennel">
-(<span style="color: #e353b9;">awful.spawn</span> <span style="color: #ae2823;">"pgrep emacs || emacs"</span>)
+(<span style="color: #dc8cc3;">awful.spawn</span> <span style="color: #c83029;">"pgrep emacs || emacs"</span>)
 
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgfccb481" class="outline-2">
-<h2 id="orgfccb481">Final Notes</h2>
-<div class="outline-text-2" id="text-orgfccb481">
+<div id="outline-container-org1a156bf" class="outline-2">
+<h2 id="org1a156bf">Final Notes</h2>
+<div class="outline-text-2" id="text-org1a156bf">
 <p>
 That's it! This slimmed down the default config by a factor of 2 or so, though some stuff is taken out to my preference. You can generate the config with <code>fennel --compile rc.fnl &gt; rc.lua</code>. 
 </p>
@@ -720,7 +734,7 @@ That's it! This slimmed down the default config by a factor of 2 or so, though s
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Samuel Wallace</p>
-<p class="date">Created: 2022-05-23 Mon 11:26</p>
+<p class="date">Created: 2022-05-25 Wed 09:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

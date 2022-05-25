@@ -82,6 +82,9 @@
 
 (local batt_thresh 0.25)
 
+(local weather_box (wibox.widget {:widget wibox.widget.textbox
+				  :text "No weather right now"}))
+
 (awful.screen.connect_for_each_screen
  (fn [s]
    (do
@@ -91,41 +94,46 @@
      (tset s :mylayoutbox (awful.widget.layoutbox s)) ;; have a box showing current layout
      (s.mylayoutbox:buttons (awful.button {} 1 (fn [] (awful.layout.inc 1)))) ;;clicking on layoutbox advances the layouts through the list
      (tset s :mytaglist (awful.widget.taglist {
-                                             :screen s
-                                             :filter awful.widget.taglist.filter.noempty ;; only show tags which are not empty
-                                             :buttons taglist_buttons})) ;; click the taglist by the predefined buttons
+					     :screen s
+					     :filter awful.widget.taglist.filter.noempty ;; only show tags which are not empty
+					     :buttons taglist_buttons})) ;; click the taglist by the predefined buttons
      (tset s :mytasklist (awful.widget.tasklist { :screen s
-                                                :filter awful.widget.tasklist.filter.currenttags})) ;; show the icons and names of windows in the current tag(s)
+						:filter awful.widget.tasklist.filter.currenttags})) ;; show the icons and names of windows in the current tag(s)
      (tset s :mywibox (awful.wibar { :position "top" ;; show bar across top of screen
-                                     :screen s }))
+				     :screen s }))
      (s.mywibox:setup { :layout wibox.layout.align.horizontal ;; horizontal layout for the whole bar
-                        1 { :layout wibox.layout.fixed.horizontal ;; horizontal layout for the left side
-                            1 mylauncher
-                            2 s.mytaglist
-                            3 s.mypromptbox }
-                        2 s.mytasklist ;; middle widget
-                        3 { :layout wibox.layout.fixed.horizontal ;; horizontal layout for right side
-                            1 (wibox.widget.systray)
-                            2 (awful.widget.watch "bash -c 'acpi -b'" ;; watching battery updates
-                                                  30 ;; recall every 30 secs
-                                                  (fn [widget stdout] ;; here is fn to be called after calling acpi
-                                                    (let [batt_percent (/ (tonumber (string.match stdout "(%d+)%%")) 100)] ;; get battery percentage as decimal
-                                                      (do
-                                                        (widget:set_value batt_percent) ;; set progressbar to show batt_percent full
-                                                        (if (and (< batt_percent batt_thresh) ;; if we are hitting batt_thresh for first time, then
-                                                                 (not batt_low))
-                                                            (do
-                                                              (naughty.notify {:title "Battery Low!" ;; notify about low battery
-                                                                               :preset naughty.config.presets.critical})
-                                                              (set batt_low true)))
-                                                        (if (< batt_percent batt_thresh) ;; if low battery
-                                                            (tset widget :color "red") ;;set bar color red
-                                                            (do ;; otherwise set green and mark no low battery
-                                                              (tset widget :color "green")
-                                                              (set batt_low false))))))
-                                                  batt_bar)
-                            3 mytextclock ;; clock
-                            4 s.mylayoutbox}})))) ;; show layout
+			1 { :layout wibox.layout.fixed.horizontal ;; horizontal layout for the left side
+			    1 mylauncher
+			    2 s.mytaglist
+			    3 s.mypromptbox }
+			2 s.mytasklist ;; middle widget
+			3 { :layout wibox.layout.fixed.horizontal ;; horizontal layout for right side
+			    1 (awful.widget.watch "bash -c 'curl -s https://wttr.in/chicago?format=3'"
+						  600
+						  (fn [widget stdout]
+						      (tset widget :text stdout))
+						  weather_box)
+			    2 (wibox.widget.systray)
+			    3 (awful.widget.watch "bash -c 'acpi -b'" ;; watching battery updates
+						  30 ;; recall every 30 secs
+						  (fn [widget stdout] ;; here is fn to be called after calling acpi
+						    (let [batt_percent (/ (tonumber (string.match stdout "(%d+)%%")) 100)] ;; get battery percentage as decimal
+						      (do
+							(widget:set_value batt_percent) ;; set progressbar to show batt_percent full
+							(if (and (< batt_percent batt_thresh) ;; if we are hitting batt_thresh for first time, then
+								 (not batt_low))
+							    (do
+							      (naughty.notify {:title "Battery Low!" ;; notify about low battery
+									       :preset naughty.config.presets.critical})
+							      (set batt_low true)))
+							(if (< batt_percent batt_thresh) ;; if low battery
+							    (tset widget :color "red") ;;set bar color red
+							    (do ;; otherwise set green and mark no low battery
+							      (tset widget :color "green")
+							      (set batt_low false))))))
+						  batt_bar)
+			    4 mytextclock ;; clock
+			    5 s.mylayoutbox}})))) ;; show layout
 
 (var globalkeys (gears.table.join
                    (awful.key [modkey] "Left" awful.tag.viewprev)
