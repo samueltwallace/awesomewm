@@ -171,6 +171,8 @@ The ~batt_hover~ widget gives the ~batt_bar~ a hover popup that shows the output
 #+BEGIN_src fennel
   (local weather_box (wibox.widget {:widget wibox.widget.textbox
 				    :text "No weather right now"}))
+
+  
 #+END_src
 
 * Screen Connect
@@ -245,7 +247,7 @@ We'll set up a variable for all the window management keybindings:
                    (awful.key [modkey] "Escape" awful.tag.history.restore)
                    (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
                    (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
-                   (awful.key [modkey] "x" (fn [] (mymainmenu:show)))
+                   (awful.key [modkey] "x" (fn [] (mylauncher:show)))
                    (awful.key [modkey "Control"] "r" awesome.restart)
                    (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
                    (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
