@@ -7,12 +7,6 @@
 (local  naughty (require :naughty))
 (local  menubar (require :menubar))
 
-(fn dist-table-prefix [bigtbl names]
-  (icollect [_ name (ipairs names)]
-    (if (= (type name) "table")
-        (. bigtbl (table.unpack name))
-        (. bigtbl name))))
-
 (if awesome.startup_errors
     (naughty.notify { :preset naughty.config.presets.critical
                       :title "Oops, there were errors during startup!"
@@ -38,18 +32,24 @@
 (local modkey "Mod4")
 (local fnlconf "~/.config/awesome/rc.fnl")
 
-(set awful.layout.layouts (dist-table-prefix
-                           awful.layout.suit
-                           [ ["tile" "right"] "max" "floating"]))
+(tset awful :layout :layouts [awful.layout.suit.tile.right
+			      awful.layout.suit.tile.top
+			      awful.layout.suit.max
+			      awful.layout.suit.floating])
 
+(fn preferred-layout [s] (do
+			   (naughty.notify {:text (.. "width " s.geometry.width " height " s.geometry.height)})
+			   (if (>= s.geometry.width s.geometry.height)
+			       1
+			   2)))
 
 (local menu [["quit" awesome.quit]
-             ["restart" awesome.restart]
-             ["edit config" (.. editor-cmd " " fnlconf)]
-             ["Emacs" (fn [] (awful.spawn "emacs"))]
-             ["Firefox" (fn [] (awful.spawn "firefox"))]
-             ["Zathura" (fn [] (awful.spawn "zathura"))]
-             ["Discord" (fn [] (awful.spawn "discord"))]])
+	     ["restart" awesome.restart]
+	     ["edit config" (.. editor-cmd " " fnlconf)]
+	     ["Emacs" (fn [] (awful.spawn "emacs"))]
+	     ["Firefox" (fn [] (awful.spawn "firefox"))]
+	     ["Zathura" (fn [] (awful.spawn "zathura"))]
+	     ["Discord" (fn [] (awful.spawn "discord"))]])
 
 (local my-perm-tags ["E" "F" "Z" "D"])
 
@@ -75,8 +75,8 @@
 (local mytextclock (wibox.widget.textclock))
 
 (local taglist_buttons (gears.table.join
-			(awful.button {} 1 (fn [t] (t:view_only)))
-			(awful.button {} 3 awful.tag.viewtoggle)))
+			(awful.button { } 1 (fn [t] (t:view_only)))
+			(awful.button { } 3 awful.tag.viewtoggle)))
 
 (var batt_low false)
 
@@ -89,10 +89,10 @@
  (fn [s]
    (do
      (set-wallpaper s) ;; set wallpaper on each screen
-     (awful.tag my-perm-tags s (. awful.layout.layouts 1)) ;; use first layout in the list by default
+     (awful.tag my-perm-tags s (. awful.layout.layouts (preferred-layout s)))
      (tset s :mypromptbox (awful.widget.prompt)) ;;have a prompt box
      (tset s :mylayoutbox (awful.widget.layoutbox s)) ;; have a box showing current layout
-     (s.mylayoutbox:buttons (awful.button {} 1 (fn [] (awful.layout.inc 1)))) ;;clicking on layoutbox advances the layouts through the list
+     (s.mylayoutbox:buttons (awful.button {} 1 (fn [] (awful.layout.inc 1))) ) ;;clicking on layoutbox advances the layouts through the list
      (tset s :mytaglist (awful.widget.taglist {
 					     :screen s
 					     :filter awful.widget.taglist.filter.noempty ;; only show tags which are not empty
@@ -107,7 +107,7 @@
 			    2 s.mytaglist
 			    3 s.mypromptbox }
 			2 s.mytasklist ;; middle widget
-			3 { :layout wibox.layout.fixed.horizontal ;; horizontal layout for right side
+			3  { :layout wibox.layout.fixed.horizontal ;; horizontal layout for right side
 			    1 (awful.widget.watch "bash -c 'curl -s https://wttr.in/chicago?format=3'" ;; take from wttr.in
 						  600 ;;refresh every 5 mins
 						  (fn [widget stdout]
@@ -130,7 +130,7 @@
 							    (tset widget :color "red") ;;set bar color red
 							    (do ;; otherwise set green and mark no low battery
 							      (tset widget :color "green")
-							      (set batt_low false))))))
+							      (set batt_low false)))))) ;; need to check delims here, org mode matches < and )
 						  batt_bar)
 			    4 mytextclock ;; clock
 			    5 s.mylayoutbox}})))) ;; show layout
@@ -141,7 +141,6 @@
                    (awful.key [modkey] "Escape" awful.tag.history.restore)
                    (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
                    (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
-                   (awful.key [modkey] "x" (fn [] (mylauncher:show)))
                    (awful.key [modkey "Control"] "r" awesome.restart)
                    (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
                    (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
@@ -177,7 +176,7 @@
 (root.keys globalkeys)
 
 (tset awful.rules :rules [
-                         { :rule {} ;; default for all windows
+                         { :rule { } ;; default for all windows
                            :properties {
                                         :border_width beautiful.border_width
                                         :border_color beautiful.border_normal
@@ -208,8 +207,7 @@
                                        (= c.class "firefox")
                                        (= c.class "discord")))
                                       (let [t (awful.tag.add c.class {:screen c.screen
-                                                                      :icon (gears.surface.duplicate_surface c.icon)
-                                                                      :layout (. awful.layout.layouts 1)})]
+                                                                      :icon (gears.surface.duplicate_surface c.icon)})]
                                         (c:tags [t])))))
 
 (fn is-tag-by-name [tag name]
