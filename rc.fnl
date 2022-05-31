@@ -37,11 +37,10 @@
 			      awful.layout.suit.max
 			      awful.layout.suit.floating])
 
-(fn preferred-layout [s] (do
-			   (naughty.notify {:text (.. "width " s.geometry.width " height " s.geometry.height)})
+(fn preferred-layout [s] (naughty.notify {:text (.. "width " s.geometry.width " height " s.geometry.height)})
 			   (if (>= s.geometry.width s.geometry.height)
 			       1
-			   2)))
+			   2))
 
 (local menu [["quit" awesome.quit]
 	     ["restart" awesome.restart]

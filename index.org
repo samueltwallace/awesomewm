@@ -69,33 +69,32 @@ And we set up some local variables for program preferences, layouts, etc...
 
 #+BEGIN_src fennel
 
-	(local terminal "emacsclient -e '(shell)'")
-	(local editor "emacsclient")
-	(local editor-cmd "emacsclient")
+  (local terminal "emacsclient -e '(shell)'")
+  (local editor "emacsclient")
+  (local editor-cmd "emacsclient")
 
-	(local modkey "Mod4")
-	(local fnlconf "~/.config/awesome/rc.fnl")
+  (local modkey "Mod4")
+  (local fnlconf "~/.config/awesome/rc.fnl")
 
-	(tset awful :layout :layouts [awful.layout.suit.tile.right
-				      awful.layout.suit.tile.top
-				      awful.layout.suit.max
-				      awful.layout.suit.floating])
+  (tset awful :layout :layouts [awful.layout.suit.tile.right
+				awful.layout.suit.tile.top
+				awful.layout.suit.max
+				awful.layout.suit.floating])
 
-	(fn preferred-layout [s] (do
-				   (naughty.notify {:text (.. "width " s.geometry.width " height " s.geometry.height)})
-				   (if (>= s.geometry.width s.geometry.height)
-				       1
-				   2)))
+  (fn preferred-layout [s] (naughty.notify {:text (.. "width " s.geometry.width " height " s.geometry.height)})
+			     (if (>= s.geometry.width s.geometry.height)
+				 1
+				 2))
 
-	(local menu [["quit" awesome.quit]
-		     ["restart" awesome.restart]
-		     ["edit config" (.. editor-cmd " " fnlconf)]
-		     ["Emacs" (fn [] (awful.spawn "emacs"))]
-		     ["Firefox" (fn [] (awful.spawn "firefox"))]
-		     ["Zathura" (fn [] (awful.spawn "zathura"))]
-		     ["Discord" (fn [] (awful.spawn "discord"))]])
+  (local menu [["quit" awesome.quit]
+	       ["restart" awesome.restart]
+	       ["edit config" (.. editor-cmd " " fnlconf)]
+	       ["Emacs" (fn [] (awful.spawn "emacs"))]
+	       ["Firefox" (fn [] (awful.spawn "firefox"))]
+	       ["Zathura" (fn [] (awful.spawn "zathura"))]
+	       ["Discord" (fn [] (awful.spawn "discord"))]])
 
-	(local my-perm-tags ["E" "F" "Z" "D"])
+  (local my-perm-tags ["E" "F" "Z" "D"])
 #+END_src
 
 ~my-perm-tags~ are the tags that always stay available, one for each of the programs in the menu. Every other tag will be created and destroyed with new program launches and closes.
