@@ -295,6 +295,8 @@ And let's set the keys:
 
 #+END_src
 
+** IN Major Mode Keys for Tags
+
 * Rules
 
 Most of this is fairly standard... note the end though!
