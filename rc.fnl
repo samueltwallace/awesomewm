@@ -40,7 +40,7 @@
 (fn preferred-layout [s] (naughty.notify {:text (.. "width " s.geometry.width " height " s.geometry.height)})
 			   (if (>= s.geometry.width s.geometry.height)
 			       1
-			   2))
+			       2))
 
 (local menu [["quit" awesome.quit]
 	     ["restart" awesome.restart]
@@ -135,23 +135,24 @@
 			    5 s.mylayoutbox}})))) ;; show layout
 
 (var globalkeys (gears.table.join
-                   (awful.key [modkey] "Left" awful.tag.viewprev)
-                   (awful.key [modkey] "Right" awful.tag.viewnext)
-                   (awful.key [modkey] "Escape" awful.tag.history.restore)
-                   (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
-                   (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
-                   (awful.key [modkey "Control"] "r" awesome.restart)
-                   (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
-                   (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
-                   (awful.key [modkey] "Tab" (fn [] (awful.screen.focus_relative 1)))
-                   (awful.key [modkey] "u" awful.client.urgent.jumpto)
-                   (awful.key [modkey] "g" (fn [] (awful.spawn "i3lock -c 000000")))
-                   (awful.key [modkey] "space" (fn [] (menubar.show)))))
+		   (awful.key [modkey] "Left" awful.tag.viewprev)
+		   (awful.key [modkey] "Right" awful.tag.viewnext)
+		   (awful.key [modkey] "Escape" awful.tag.history.restore)
+		   (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
+		   (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
+		   (awful.key [modkey "Control"] "r" awesome.restart)
+		   (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
+		   (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
+		   (awful.key [modkey] "Tab" (fn [] (awful.screen.focus_relative 1)))
+		   (awful.key [modkey] "u" awful.client.urgent.jumpto)
+		   (awful.key [modkey] "g" (fn [] (awful.spawn "i3lock -c 000000")))
+		   (awful.key [modkey] "space" (fn [] (menubar.show)))))
 
 (local clientkeys (gears.table.join
-                   (awful.key [modkey] "f" (fn [c] (do
-                                                     (tset c :fullscreen (not c.fullscreen))
-                                                     (c:raise))))))
+		   (awful.key [modkey "Shift"] "Tab" (fn [c] (c:move_to_screen)))
+		   (awful.key [modkey] "f" (fn [c] (do
+						     (tset c :fullscreen (not c.fullscreen))
+						     (c:raise))))))
 
 (each [idx tag-name (pairs my-perm-tags)]
   (set globalkeys (gears.table.join globalkeys

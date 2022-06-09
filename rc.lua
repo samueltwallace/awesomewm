@@ -135,12 +135,15 @@ end
 globalkeys = gears.table.join(awful.key({modkey}, "Left", awful.tag.viewprev), awful.key({modkey}, "Right", awful.tag.viewnext), awful.key({modkey}, "Escape", awful.tag.history.restore), awful.key({modkey}, "j", _17_), awful.key({modkey}, "k", _18_), awful.key({modkey, "Control"}, "r", awesome.restart), awful.key({modkey, "Shift"}, "j", _19_), awful.key({modkey, "Shift"}, "k", _20_), awful.key({modkey}, "Tab", _21_), awful.key({modkey}, "u", awful.client.urgent.jumpto), awful.key({modkey}, "g", _22_), awful.key({modkey}, "space", _23_))
 local clientkeys
 local function _24_(c)
+  return c:move_to_screen()
+end
+local function _25_(c)
   c["fullscreen"] = not c.fullscreen
   return c:raise()
 end
-clientkeys = gears.table.join(awful.key({modkey}, "f", _24_))
+clientkeys = gears.table.join(awful.key({modkey, "Shift"}, "Tab", _24_), awful.key({modkey}, "f", _25_))
 for idx, tag_name in pairs(my_perm_tags) do
-  local function _25_()
+  local function _26_()
     local screen = awful.screen.focused()
     local tag = screen.tags[idx]
     if tag then
@@ -149,7 +152,7 @@ for idx, tag_name in pairs(my_perm_tags) do
       return nil
     end
   end
-  local function _27_()
+  local function _28_()
     local screen = awful.screen.focused()
     local tag = screen.tags[idx]
     if tag then
@@ -158,7 +161,7 @@ for idx, tag_name in pairs(my_perm_tags) do
       return nil
     end
   end
-  local function _29_()
+  local function _30_()
     if client.focus then
       local tag = client.focus.screen.tags[i]
       if tag then
@@ -170,11 +173,11 @@ for idx, tag_name in pairs(my_perm_tags) do
       return nil
     end
   end
-  globalkeys = gears.table.join(globalkeys, awful.key({modkey}, ("#" .. (idx + 9)), _25_), awful.key({modkey, "Control"}, ("#" .. (idx + 9)), _27_), awful.key({modkey, "Shift"}, ("#" .. (idx + 9)), _29_))
+  globalkeys = gears.table.join(globalkeys, awful.key({modkey}, ("#" .. (idx + 9)), _26_), awful.key({modkey, "Control"}, ("#" .. (idx + 9)), _28_), awful.key({modkey, "Shift"}, ("#" .. (idx + 9)), _30_))
 end
 root.keys(globalkeys)
 do end (awful.rules)["rules"] = {{rule = {}, properties = {border_width = beautiful.border_width, border_color = beautiful.border_normal, focus = awful.client.focus.filter, raise = true, keys = clientkeys, screen = awful.screen.preferred, placement = (awful.placement.no_overlap + awful.placement.no_offscreen)}}, {rule = {class = "Emacs"}, properties = {screen = screen.count(), tag = "E"}}, {rule = {class = "firefox"}, properties = {tag = "F"}}, {rule = {class = "Zathura"}, properties = {tag = "Z"}}, {rule = {class = "discord"}, properties = {tag = "D"}}}
-local function _32_(c)
+local function _33_(c)
   if (awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position) then
     awful.placement.no_offscreen(c)
   else
@@ -186,11 +189,11 @@ local function _32_(c)
     return nil
   end
 end
-client.connect_signal("manage", _32_)
+client.connect_signal("manage", _33_)
 local function is_tag_by_name(tag, name)
   return (tag == awful.tag.find_by_name(awful.screen.focused(), name))
 end
-local function _35_(c)
+local function _36_(c)
   for _, tag in ipairs(c.screen.tags) do
     if not (tag:clients()[1] or is_tag_by_name(tag, "E") or is_tag_by_name(tag, "F") or is_tag_by_name(tag, "Z") or is_tag_by_name(tag, "D")) then
       tag:delete()
@@ -200,10 +203,10 @@ local function _35_(c)
   end
   return nil
 end
-client.connect_signal("unmanage", _35_)
-local function _37_(c)
+client.connect_signal("unmanage", _36_)
+local function _38_(c)
   c:emit_signal("request::activate", "mouse_enter", {raise = false})
   return nil
 end
-client.connect_signal("mouse::enter", _37_)
+client.connect_signal("mouse::enter", _38_)
 return awful.spawn("pgrep emacs || emacs")

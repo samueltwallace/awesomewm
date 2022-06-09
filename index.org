@@ -233,20 +233,19 @@ We'll set up a variable for all the window management keybindings:
 
 
 #+BEGIN_src fennel
-
-(var globalkeys (gears.table.join
-                   (awful.key [modkey] "Left" awful.tag.viewprev)
-                   (awful.key [modkey] "Right" awful.tag.viewnext)
-                   (awful.key [modkey] "Escape" awful.tag.history.restore)
-                   (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
-                   (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
-                   (awful.key [modkey "Control"] "r" awesome.restart)
-                   (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
-                   (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
-                   (awful.key [modkey] "Tab" (fn [] (awful.screen.focus_relative 1)))
-                   (awful.key [modkey] "u" awful.client.urgent.jumpto)
-                   (awful.key [modkey] "g" (fn [] (awful.spawn "i3lock -c 000000")))
-                   (awful.key [modkey] "space" (fn [] (menubar.show)))))
+  (var globalkeys (gears.table.join
+		     (awful.key [modkey] "Left" awful.tag.viewprev)
+		     (awful.key [modkey] "Right" awful.tag.viewnext)
+		     (awful.key [modkey] "Escape" awful.tag.history.restore)
+		     (awful.key [modkey] "j" (fn [] (awful.client.focus.byidx 1)))
+		     (awful.key [modkey] "k" (fn [] (awful.client.focus.byidx -1)))
+		     (awful.key [modkey "Control"] "r" awesome.restart)
+		     (awful.key [modkey "Shift"] "j" (fn [] (awful.client.swap.byidx 1)))
+		     (awful.key [modkey "Shift"] "k" (fn [] (awful.client.swap.byidx -1)))
+		     (awful.key [modkey] "Tab" (fn [] (awful.screen.focus_relative 1)))
+		     (awful.key [modkey] "u" awful.client.urgent.jumpto)
+		     (awful.key [modkey] "g" (fn [] (awful.spawn "i3lock -c 000000")))
+		     (awful.key [modkey] "space" (fn [] (menubar.show)))))
 #+END_src
 
 Now we'll do the only client key I want to do: set to full screen.
@@ -254,10 +253,11 @@ Now we'll do the only client key I want to do: set to full screen.
 
 #+BEGIN_src fennel
 
-(local clientkeys (gears.table.join
-                   (awful.key [modkey] "f" (fn [c] (do
-                                                     (tset c :fullscreen (not c.fullscreen))
-                                                     (c:raise))))))
+  (local clientkeys (gears.table.join
+		     (awful.key [modkey "Shift"] "Tab" (fn [c] (c:move_to_screen)))
+		     (awful.key [modkey] "f" (fn [c] (do
+						       (tset c :fullscreen (not c.fullscreen))
+						       (c:raise))))))
 #+END_src
 
 Now we'll switch between workspaces with the ~modkey~ and a number, as many as there are elements in ~my-perm-tags~.
