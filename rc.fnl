@@ -234,3 +234,4 @@
 nil))
 
 (awful.spawn "pgrep emacs || emacs")
+(awful.spawn "pgrep picom || picom")

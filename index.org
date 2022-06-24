@@ -390,6 +390,8 @@ Start Emacs if not running:
 #+BEGIN_src fennel
 
 (awful.spawn "pgrep emacs || emacs")
+(awful.spawn "pgrep picom || picom")
+
 
 #+END_src
 
